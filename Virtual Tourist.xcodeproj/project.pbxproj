@@ -14,6 +14,10 @@
 		695D977324AB8C550077AC06 /* Virtual_Tourist.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 695D977124AB8C550077AC06 /* Virtual_Tourist.xcdatamodeld */; };
 		695D977524AB8C5E0077AC06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 695D977424AB8C5E0077AC06 /* Assets.xcassets */; };
 		695D977824AB8C5E0077AC06 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695D977624AB8C5E0077AC06 /* LaunchScreen.storyboard */; };
+		695D978124ACA0B50077AC06 /* PhotoAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D978024ACA0B50077AC06 /* PhotoAlbumViewController.swift */; };
+		695D978324ACBD170077AC06 /* PhotoAlbumCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D978224ACBD170077AC06 /* PhotoAlbumCollectionViewController.swift */; };
+		695D978524ACBDFC0077AC06 /* TestClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D978424ACBDFC0077AC06 /* TestClass.swift */; };
+		695D978724ACD5760077AC06 /* PhotoAlbumCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D978624ACD5760077AC06 /* PhotoAlbumCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +30,10 @@
 		695D977424AB8C5E0077AC06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		695D977724AB8C5E0077AC06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		695D977924AB8C5E0077AC06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		695D978024ACA0B50077AC06 /* PhotoAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlbumViewController.swift; sourceTree = "<group>"; };
+		695D978224ACBD170077AC06 /* PhotoAlbumCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlbumCollectionViewController.swift; sourceTree = "<group>"; };
+		695D978424ACBDFC0077AC06 /* TestClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestClass.swift; sourceTree = "<group>"; };
+		695D978624ACD5760077AC06 /* PhotoAlbumCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlbumCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,9 +66,9 @@
 		695D976724AB8C550077AC06 /* Virtual Tourist */ = {
 			isa = PBXGroup;
 			children = (
+				695D977F24ACA06A0077AC06 /* View Controller */,
 				695D976824AB8C550077AC06 /* AppDelegate.swift */,
 				695D976A24AB8C550077AC06 /* SceneDelegate.swift */,
-				695D976C24AB8C550077AC06 /* TravelLocationsMapController.swift */,
 				695D976E24AB8C550077AC06 /* Main.storyboard */,
 				695D977424AB8C5E0077AC06 /* Assets.xcassets */,
 				695D977624AB8C5E0077AC06 /* LaunchScreen.storyboard */,
@@ -68,6 +76,18 @@
 				695D977124AB8C550077AC06 /* Virtual_Tourist.xcdatamodeld */,
 			);
 			path = "Virtual Tourist";
+			sourceTree = "<group>";
+		};
+		695D977F24ACA06A0077AC06 /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				695D976C24AB8C550077AC06 /* TravelLocationsMapController.swift */,
+				695D978024ACA0B50077AC06 /* PhotoAlbumViewController.swift */,
+				695D978224ACBD170077AC06 /* PhotoAlbumCollectionViewController.swift */,
+				695D978424ACBDFC0077AC06 /* TestClass.swift */,
+				695D978624ACD5760077AC06 /* PhotoAlbumCollectionViewCell.swift */,
+			);
+			path = "View Controller";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,7 +164,11 @@
 				695D977324AB8C550077AC06 /* Virtual_Tourist.xcdatamodeld in Sources */,
 				695D976D24AB8C550077AC06 /* TravelLocationsMapController.swift in Sources */,
 				695D976924AB8C550077AC06 /* AppDelegate.swift in Sources */,
+				695D978724ACD5760077AC06 /* PhotoAlbumCollectionViewCell.swift in Sources */,
+				695D978124ACA0B50077AC06 /* PhotoAlbumViewController.swift in Sources */,
 				695D976B24AB8C550077AC06 /* SceneDelegate.swift in Sources */,
+				695D978524ACBDFC0077AC06 /* TestClass.swift in Sources */,
+				695D978324ACBD170077AC06 /* PhotoAlbumCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

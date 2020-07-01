@@ -18,11 +18,13 @@ class TravelLocationsMapController: UIViewController {
     
     var annotations = [MKPointAnnotation]()
 
+
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-        
+        navigationController?.navigationBar.isHidden = true;
         gestureConfigurations();
+        
     }
     
 }
@@ -55,6 +57,13 @@ extension TravelLocationsMapController: MKMapViewDelegate {
             }
         }
     }
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        let photoAlbumViewController = storyboard!.instantiateViewController(withIdentifier: "PhotoAlbumViewController") as! PhotoAlbumViewController;
+        navigationController?.navigationBar.isHidden = false;
+        photoAlbumViewController.annotation = view.annotation as! MKPointAnnotation;
+        navigationController?.pushViewController(photoAlbumViewController, animated: true);
+        
+    }
     
     
     
@@ -63,16 +72,16 @@ extension TravelLocationsMapController: MKMapViewDelegate {
 // MARK:- Gesture Recognizer Methods.
 extension TravelLocationsMapController {
     func gestureConfigurations() {
-        let singleTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(TravelLocationsMapController.handelMapTab(_:)))
-        mapView.addGestureRecognizer(singleTapRecognizer)
+//        let singleTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(TravelLocationsMapController.handelMapTab(_:)))
+//        mapView.addGestureRecognizer(singleTapRecognizer)
         
         let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: #selector(TravelLocationsMapController.handleLongPress(_:)))
         longPressRecogniser.minimumPressDuration = 1.0
         mapView.addGestureRecognizer(longPressRecogniser)
     }
-    @objc func handelMapTab(_ gestureRecognizer:  UIGestureRecognizer){
-        addAnnotation(with: gestureRecognizer);
-    }
+//    @objc func handelMapTab(_ gestureRecognizer:  UIGestureRecognizer){
+//        addAnnotation(with: gestureRecognizer);
+//    }
     
     @objc func handleLongPress(_ gestureRecognizer : UIGestureRecognizer){
         if gestureRecognizer.state != .began { return }
@@ -82,7 +91,7 @@ extension TravelLocationsMapController {
         let touchPoint = gestureRecognizer.location(in: mapView)
         let touchMapCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
         
-        let annotation = MKPointAnnotation()
+        let annotation = MKPointAnnotation();
         annotation.coordinate = touchMapCoordinate;
         
         annotations.append(annotation)
