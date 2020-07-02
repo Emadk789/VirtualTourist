@@ -16,7 +16,6 @@
 		695D977824AB8C5E0077AC06 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695D977624AB8C5E0077AC06 /* LaunchScreen.storyboard */; };
 		695D978124ACA0B50077AC06 /* PhotoAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D978024ACA0B50077AC06 /* PhotoAlbumViewController.swift */; };
 		695D978324ACBD170077AC06 /* PhotoAlbumCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D978224ACBD170077AC06 /* PhotoAlbumCollectionViewController.swift */; };
-		695D978524ACBDFC0077AC06 /* TestClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D978424ACBDFC0077AC06 /* TestClass.swift */; };
 		695D978724ACD5760077AC06 /* PhotoAlbumCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D978624ACD5760077AC06 /* PhotoAlbumCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,7 +31,6 @@
 		695D977924AB8C5E0077AC06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		695D978024ACA0B50077AC06 /* PhotoAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlbumViewController.swift; sourceTree = "<group>"; };
 		695D978224ACBD170077AC06 /* PhotoAlbumCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlbumCollectionViewController.swift; sourceTree = "<group>"; };
-		695D978424ACBDFC0077AC06 /* TestClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestClass.swift; sourceTree = "<group>"; };
 		695D978624ACD5760077AC06 /* PhotoAlbumCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlbumCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,7 +82,6 @@
 				695D976C24AB8C550077AC06 /* TravelLocationsMapController.swift */,
 				695D978024ACA0B50077AC06 /* PhotoAlbumViewController.swift */,
 				695D978224ACBD170077AC06 /* PhotoAlbumCollectionViewController.swift */,
-				695D978424ACBDFC0077AC06 /* TestClass.swift */,
 				695D978624ACD5760077AC06 /* PhotoAlbumCollectionViewCell.swift */,
 			);
 			path = "View Controller";
@@ -167,7 +164,6 @@
 				695D978724ACD5760077AC06 /* PhotoAlbumCollectionViewCell.swift in Sources */,
 				695D978124ACA0B50077AC06 /* PhotoAlbumViewController.swift in Sources */,
 				695D976B24AB8C550077AC06 /* SceneDelegate.swift in Sources */,
-				695D978524ACBDFC0077AC06 /* TestClass.swift in Sources */,
 				695D978324ACBD170077AC06 /* PhotoAlbumCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

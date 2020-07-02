@@ -56,14 +56,4 @@ extension PhotoAlbumViewController: MKMapViewDelegate {
             }
         }
     }
-//    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-//        let photoAlbumViewController = storyboard!.instantiateViewController(withIdentifier: "PhotoAlbumViewController") as! PhotoAlbumViewController;
-//        navigationController?.navigationBar.isHidden = false;
-//        photoAlbumViewController.annotation = view.annotation as! MKPointAnnotation;
-//        navigationController?.pushViewController(photoAlbumViewController, animated: true);
-//        
-//    }
-    
-    
-    
 }

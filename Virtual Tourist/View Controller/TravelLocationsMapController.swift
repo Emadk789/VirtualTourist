@@ -64,24 +64,16 @@ extension TravelLocationsMapController: MKMapViewDelegate {
         navigationController?.pushViewController(photoAlbumViewController, animated: true);
         
     }
-    
-    
-    
 }
 
 // MARK:- Gesture Recognizer Methods.
 extension TravelLocationsMapController {
+    
     func gestureConfigurations() {
-//        let singleTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(TravelLocationsMapController.handelMapTab(_:)))
-//        mapView.addGestureRecognizer(singleTapRecognizer)
-        
         let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: #selector(TravelLocationsMapController.handleLongPress(_:)))
         longPressRecogniser.minimumPressDuration = 1.0
         mapView.addGestureRecognizer(longPressRecogniser)
     }
-//    @objc func handelMapTab(_ gestureRecognizer:  UIGestureRecognizer){
-//        addAnnotation(with: gestureRecognizer);
-//    }
     
     @objc func handleLongPress(_ gestureRecognizer : UIGestureRecognizer){
         if gestureRecognizer.state != .began { return }
