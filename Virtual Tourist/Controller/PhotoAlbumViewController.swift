@@ -14,17 +14,30 @@ class PhotoAlbumViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     
     var annotation = MKPointAnnotation()
-
+    @IBOutlet weak var newCollectionButton: UIButton!
+    @IBOutlet weak var test: UIView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+//        test.conten
         mapView.delegate = self
+
         addAnnotation()
+        
+//        newCollectionButton.isEnabled = false;
 
     }
     
     func addAnnotation(){
         mapView.centerCoordinate = annotation.coordinate;
         mapView.addAnnotation(annotation);
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ToPhotoAlbumCollectionViewController" {
+            let photoAlbumCollectionViewController = segue.destination as! PhotoAlbumCollectionViewController;
+            photoAlbumCollectionViewController.dataProtocolDelegate = self;
+        }
     }
 
 }
@@ -56,4 +69,16 @@ extension PhotoAlbumViewController: MKMapViewDelegate {
             }
         }
     }
+}
+
+extension PhotoAlbumViewController: DataProtocol {
+    func willStartDownloadeData() {
+        newCollectionButton.isEnabled = false;
+    }
+    
+    func didFinishDownloadeData() {
+        newCollectionButton.isEnabled = true;
+    }
+    
+    
 }

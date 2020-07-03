@@ -144,12 +144,11 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1bh-W5-eno">
                                 <rect key="frame" x="0.0" y="218" width="375" height="411"/>
                                 <connections>
-                                    <segue destination="e6b-UH-cN5" kind="embed" id="Ys3-Lu-1KC"/>
+                                    <segue destination="e6b-UH-cN5" kind="embed" identifier="ToPhotoAlbumCollectionViewController" id="Ys3-Lu-1KC"/>
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="glP-7x-G5g">
                                 <rect key="frame" x="0.0" y="637" width="375" height="30"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="New Collection"/>
                             </button>
                         </subviews>
@@ -171,6 +170,8 @@
                     <navigationItem key="navigationItem" id="zus-3L-LAz"/>
                     <connections>
                         <outlet property="mapView" destination="LPh-5i-V2A" id="sgP-ws-hfS"/>
+                        <outlet property="newCollectionButton" destination="glP-7x-G5g" id="bqY-xT-eSM"/>
+                        <outlet property="test" destination="1bh-W5-eno" id="U0D-JU-Llj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Phr-0i-AnJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

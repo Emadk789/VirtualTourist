@@ -20,6 +20,7 @@
 		695D978B24AF2D560077AC06 /* FlickrClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D978A24AF2D550077AC06 /* FlickrClient.swift */; };
 		695D978F24AF417E0077AC06 /* SearchResonse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D978E24AF417E0077AC06 /* SearchResonse.swift */; };
 		695D979224AFC4260077AC06 /* MapData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D979124AFC4250077AC06 /* MapData.swift */; };
+		695D979424AFD8690077AC06 /* DataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D979324AFD8690077AC06 /* DataProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		695D978A24AF2D550077AC06 /* FlickrClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrClient.swift; sourceTree = "<group>"; };
 		695D978E24AF417E0077AC06 /* SearchResonse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResonse.swift; sourceTree = "<group>"; };
 		695D979124AFC4250077AC06 /* MapData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapData.swift; sourceTree = "<group>"; };
+		695D979324AFD8690077AC06 /* DataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				695D978024ACA0B50077AC06 /* PhotoAlbumViewController.swift */,
 				695D978224ACBD170077AC06 /* PhotoAlbumCollectionViewController.swift */,
 				695D978624ACD5760077AC06 /* PhotoAlbumCollectionViewCell.swift */,
+				695D979324AFD8690077AC06 /* DataProtocol.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -211,6 +214,7 @@
 				695D976D24AB8C550077AC06 /* TravelLocationsMapController.swift in Sources */,
 				695D976924AB8C550077AC06 /* AppDelegate.swift in Sources */,
 				695D978724ACD5760077AC06 /* PhotoAlbumCollectionViewCell.swift in Sources */,
+				695D979424AFD8690077AC06 /* DataProtocol.swift in Sources */,
 				695D978F24AF417E0077AC06 /* SearchResonse.swift in Sources */,
 				695D978124ACA0B50077AC06 /* PhotoAlbumViewController.swift in Sources */,
 				695D976B24AB8C550077AC06 /* SceneDelegate.swift in Sources */,

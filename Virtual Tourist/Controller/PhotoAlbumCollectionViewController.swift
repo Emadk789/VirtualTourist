@@ -12,7 +12,7 @@ private let reuseIdentifier = "Cell"
 
 class PhotoAlbumCollectionViewController: UICollectionViewController {
     
-    
+    var dataProtocolDelegate: DataProtocol!;
     
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -20,14 +20,20 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
         configurCollectionView();
         
         
+        
     }
     
     func configurCollectionView(){
     //        24.774265
     //        46.738586
-    //        FlickrClient.taskForGetRequest(lat:     33.890842, lon: 151.274292, responseType: SearchResponse.self, page: 1, perPage: 50, completion: self.handelRestResponse(response:error:))
+//            FlickrClient.taskForGetRequest(lat:     33.890842, lon: 151.274292, responseType: SearchResponse.self, page: 1, perPage: 50, completion: self.handelRestResponse(response:error:))
             
-            
+//        PhotoAlbumViewController.newCollectionButton.isEnabled = false;
+//        let parent = self.parent as! PhotoAlbumViewController
+//        parent.newCollectionButton.isEnabled = false;
+//        let parent = PhotoAlbumViewController;
+            /*do something with parent variable*/
+        dataProtocolDelegate?.willStartDownloadeData();
         FlickrClient.taskForGetRequest(lat: (MapData.annotation.coordinate.latitude), lon: (MapData.annotation.coordinate.longitude), responseType: SearchResponse.self, page: 1, perPage: 50, completion: self.handelRestResponse(response:error:))
         }
     
@@ -48,8 +54,11 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
         
     }
     func handelImageResponse(data: [Data?], error: Error?){
+        
 //        MapData.data = data;
+//        PhotoAlbumViewController.newCollectionButton.isEnabled = true;
         collectionView.reloadData()
+        dataProtocolDelegate?.didFinishDownloadeData();
     }
     
     
