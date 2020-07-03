@@ -12,21 +12,27 @@ private let reuseIdentifier = "Cell"
 
 class PhotoAlbumCollectionViewController: UICollectionViewController {
     
+    static var data: [Data?] = [];
+    
     override func viewDidLoad() {
         super.viewDidLoad();
+//        configurCollectionView();
         
     }
     
+    
     // MARK:- UICollectionViewDataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return PhotoAlbumCollectionViewController.data.count;
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PhotoAlbumCollectionViewCell;
-        cell.backgroundColor = .black;
+        let image = UIImage(data: PhotoAlbumCollectionViewController.data[indexPath.row]!);
+        cell.imageView.image = image
         return cell;
     }
+    
 }
 
 // MARK: - Collection view flow layout delegate methods

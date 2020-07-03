@@ -16,7 +16,8 @@ class TravelLocationsMapController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     let locationManager =  CLLocationManager()
     
-    var annotations = [MKPointAnnotation]()
+    var annotations = [MKPointAnnotation]();
+    var annotationView: MKAnnotationView! = nil;
 
 
     override func viewDidLoad() {
@@ -25,9 +26,14 @@ class TravelLocationsMapController: UIViewController {
         navigationController?.navigationBar.isHidden = true;
         gestureConfigurations();
         
+//        FlickrClient.taskForGetRequest(lat: 24.774265, lon: 46.738586) { (bool, error) in
+//            
+//        }
     }
     
+    
 }
+
 
 // MARK:- MKMapViewDelegate.
 extension TravelLocationsMapController: MKMapViewDelegate {
@@ -58,12 +64,35 @@ extension TravelLocationsMapController: MKMapViewDelegate {
         }
     }
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        let photoAlbumViewController = storyboard!.instantiateViewController(withIdentifier: "PhotoAlbumViewController") as! PhotoAlbumViewController;
-        navigationController?.navigationBar.isHidden = false;
-        photoAlbumViewController.annotation = view.annotation as! MKPointAnnotation;
-        navigationController?.pushViewController(photoAlbumViewController, animated: true);
+        configurCollectionView();
+        annotationView = view;
+        
         
     }
+}
+// MARK:- Get Annotation Flickr Images.
+extension TravelLocationsMapController {
+    
+    func configurCollectionView(){
+        FlickrClient.taskForGetRequest(lat: 24.774265, lon: 46.738586, responseType: SearchResponse.self, page: 1, perPage: 30, completion: self.handelRestResponse(response:error:))
+    }
+    
+    func handelRestResponse(response: SearchResponse?, error: Error?){
+        guard let response = response else {
+            return
+        }
+        FlickrClient.getImage(photos: response.photos.photo, compleation: self.handelImageResponse(data:error:));
+        
+    }
+    func handelImageResponse(data: [Data?], error: Error?){
+        PhotoAlbumCollectionViewController.data = data;
+        
+        let photoAlbumViewController = storyboard!.instantiateViewController(withIdentifier: "PhotoAlbumViewController") as! PhotoAlbumViewController;
+        navigationController?.navigationBar.isHidden = false;
+        photoAlbumViewController.annotation = annotationView.annotation as! MKPointAnnotation;
+        navigationController?.pushViewController(photoAlbumViewController, animated: true);
+    }
+    
 }
 
 // MARK:- Gesture Recognizer Methods.
@@ -83,6 +112,7 @@ extension TravelLocationsMapController {
         let touchPoint = gestureRecognizer.location(in: mapView)
         let touchMapCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
         
+//        Get the location coordinate
         let annotation = MKPointAnnotation();
         annotation.coordinate = touchMapCoordinate;
         

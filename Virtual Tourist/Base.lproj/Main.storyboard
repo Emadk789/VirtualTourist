@@ -210,6 +210,9 @@
                                     </constraints>
                                 </collectionViewCellContentView>
                                 <size key="customSize" width="175" height="149"/>
+                                <connections>
+                                    <outlet property="imageView" destination="Ur5-AK-H0y" id="gbo-DM-b1B"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                     </collectionView>
@@ -252,9 +255,6 @@
                                     </constraints>
                                 </collectionViewCellContentView>
                                 <size key="customSize" width="175" height="149"/>
-                                <connections>
-                                    <outlet property="imageView" destination="Svc-V4-Fr8" id="lDa-nr-216"/>
-                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
