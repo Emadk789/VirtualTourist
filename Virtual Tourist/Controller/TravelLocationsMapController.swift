@@ -73,6 +73,7 @@ extension TravelLocationsMapController: MKMapViewDelegate {
 // MARK:- Get Annotation Flickr Images.
 extension TravelLocationsMapController {
     
+    
     func configurCollectionView(){
         FlickrClient.taskForGetRequest(lat: 24.774265, lon: 46.738586, responseType: SearchResponse.self, page: 1, perPage: 30, completion: self.handelRestResponse(response:error:))
     }
