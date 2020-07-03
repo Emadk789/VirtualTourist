@@ -43,7 +43,8 @@ class FlickrClient {
         
     }
     static func taskForGetRequest<ResponseType: Decodable>(lat: Double, lon: Double, responseType: ResponseType.Type, page: Int = 1, perPage: Int = 10, completion: @escaping (ResponseType?,Error?)-> Void) {
-        print(EndPoints.search(lat, lon).stringValue);
+        print(EndPoints.searchWithNumberOfImages(lat, lon, page, perPage).stringValue);
+        print();
 //        let url = EndPoints.search(lat, lon).url;
         
         let url = EndPoints.searchWithNumberOfImages(lat, lon, page, perPage).url;
@@ -61,7 +62,10 @@ class FlickrClient {
             
             do {
                 let result = try decoder.decode(responseType, from: data!);
-                completion(result, nil);
+                DispatchQueue.main.async {
+                    completion(result, nil);
+                }
+                
                 
             } catch {
                 print(error);
@@ -72,9 +76,9 @@ class FlickrClient {
         }
         task.resume()
     }
-    static func getImage(photos: [PhotoContent], compleation: @escaping([Data?], Error?)->Void) {
-        var photosData: [Data?] = [];
-        for photo in photos {
+    static func getImage(photo: PhotoContent, compleation: @escaping([Data?], Error?)->Void) {
+//        var photosData: [Data?] = [];
+//        for photo in photos {
             let url = EndPoints.requestImage(photo).url;
             
             let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -86,18 +90,19 @@ class FlickrClient {
 //                    compleation(nil, error)
 //                    return;
 //                }
-                photosData.append(data);
+                MapData.data.append(data);
+//                PhotoAlbumCollectionViewController.collectionView.reloadData()
                 
-                if photo == photos.last {
+//                if photo == photos.last {
                     DispatchQueue.main.async {
-                        compleation(photosData, nil);
+                        compleation(MapData.data, nil);
                     }
-                }
-            }
-            
+//                }
+//            }
+        }
             task.resume();
         
-        }
+        
         
         
         

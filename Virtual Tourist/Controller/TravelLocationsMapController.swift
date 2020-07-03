@@ -64,8 +64,15 @@ extension TravelLocationsMapController: MKMapViewDelegate {
         }
     }
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        configurCollectionView();
-        annotationView = view;
+        
+//        annotationView = view;
+        let photoAlbumViewController = storyboard!.instantiateViewController(withIdentifier: "PhotoAlbumViewController") as! PhotoAlbumViewController;
+        navigationController?.navigationBar.isHidden = false;
+        
+        let x = view.annotation as! MKPointAnnotation;
+        MapData.annotation = view.annotation as! MKPointAnnotation;
+        photoAlbumViewController.annotation = view.annotation as! MKPointAnnotation;
+        navigationController?.pushViewController(photoAlbumViewController, animated: true);
         
         
     }
@@ -74,25 +81,9 @@ extension TravelLocationsMapController: MKMapViewDelegate {
 extension TravelLocationsMapController {
     
     
-    func configurCollectionView(){
-        FlickrClient.taskForGetRequest(lat: 24.774265, lon: 46.738586, responseType: SearchResponse.self, page: 1, perPage: 30, completion: self.handelRestResponse(response:error:))
-    }
     
-    func handelRestResponse(response: SearchResponse?, error: Error?){
-        guard let response = response else {
-            return
-        }
-        FlickrClient.getImage(photos: response.photos.photo, compleation: self.handelImageResponse(data:error:));
-        
-    }
-    func handelImageResponse(data: [Data?], error: Error?){
-        PhotoAlbumCollectionViewController.data = data;
-        
-        let photoAlbumViewController = storyboard!.instantiateViewController(withIdentifier: "PhotoAlbumViewController") as! PhotoAlbumViewController;
-        navigationController?.navigationBar.isHidden = false;
-        photoAlbumViewController.annotation = annotationView.annotation as! MKPointAnnotation;
-        navigationController?.pushViewController(photoAlbumViewController, animated: true);
-    }
+    
+    
     
 }
 

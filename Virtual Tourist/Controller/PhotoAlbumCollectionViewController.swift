@@ -12,23 +12,58 @@ private let reuseIdentifier = "Cell"
 
 class PhotoAlbumCollectionViewController: UICollectionViewController {
     
-    static var data: [Data?] = [];
+    
     
     override func viewDidLoad() {
         super.viewDidLoad();
 //        configurCollectionView();
+        configurCollectionView();
         
+        
+    }
+    
+    func configurCollectionView(){
+    //        24.774265
+    //        46.738586
+    //        FlickrClient.taskForGetRequest(lat:     33.890842, lon: 151.274292, responseType: SearchResponse.self, page: 1, perPage: 50, completion: self.handelRestResponse(response:error:))
+            
+            
+        FlickrClient.taskForGetRequest(lat: (MapData.annotation.coordinate.latitude), lon: (MapData.annotation.coordinate.longitude), responseType: SearchResponse.self, page: 1, perPage: 50, completion: self.handelRestResponse(response:error:))
+        }
+    
+    func handelRestResponse(response: SearchResponse?, error: Error?){
+        guard response?.photos.photo != [] else {
+            MapData.data = [];
+            
+            
+            return
+        }
+        for photo in (response?.photos.photo)! {
+            
+            FlickrClient.getImage(photo: photo, compleation: self.handelImageResponse(data:error:));
+            collectionView.reloadData()
+            
+        }
+        
+        
+    }
+    func handelImageResponse(data: [Data?], error: Error?){
+//        MapData.data = data;
+        collectionView.reloadData()
     }
     
     
     // MARK:- UICollectionViewDataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return PhotoAlbumCollectionViewController.data.count;
+        return MapData.data.count;
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PhotoAlbumCollectionViewCell;
-        let image = UIImage(data: PhotoAlbumCollectionViewController.data[indexPath.row]!);
+        guard let data = MapData.data[indexPath.row] else {
+            return cell
+        }
+        let image = UIImage(data: data);
         cell.imageView.image = image
         return cell;
     }
