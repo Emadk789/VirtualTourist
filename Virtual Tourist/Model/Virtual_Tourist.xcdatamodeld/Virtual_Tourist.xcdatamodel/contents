@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Pin" representedClassName="Pin" syncable="YES" codeGenerationType="class">
+        <attribute name="data" optional="YES" attributeType="Binary"/>
+        <relationship name="pin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pins" inverseName="pins" inverseEntity="Pins"/>
+    </entity>
+    <entity name="Pins" representedClassName="Pins" syncable="YES" codeGenerationType="class">
+        <relationship name="pins" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Pin" inverseName="pin" inverseEntity="Pin"/>
+    </entity>
+    <elements>
+        <element name="Pins" positionX="-251.37109375" positionY="110.60546875" width="128" height="58"/>
+        <element name="Pin" positionX="-50.90234375" positionY="68.79296875" width="128" height="73"/>
+    </elements>
+</model>
