@@ -7,8 +7,11 @@
 //
 
 import Foundation
+import CoreData;
 
 class DataContorller {
+    
+    private init(){}
     // MARK: - Core Data stack
 
     static var persistentContainer: NSPersistentContainer = {
@@ -22,11 +25,29 @@ class DataContorller {
         })
         return container
     }()
+    
+    static func getContext() -> NSManagedObjectContext {
+        return DataContorller.persistentContainer.viewContext;
+    }
+    
+//    static func load(completion: (() -> Void)? = nil){
+//        DataContorller.persistentContainer.loadPersistentStores { (storeDescription, error) in
+//            guard error == nil else {
+//                fatalError(error!.localizedDescription);
+//            }
+//            saveContextChanges();
+//            completion?();
+//        }
+//    }
+    
+//    var viewContext: NSPersistentContainer = {
+//        DataContorller.persistentContainer.context;
+//    }
 
     // MARK: - Core Data Saving support
 
-    func saveContext () {
-        let context = persistentContainer.viewContext
+    static func saveContext () {
+        let context = DataContorller.persistentContainer.viewContext
         if context.hasChanges {
             do {
                 try context.save()
@@ -37,3 +58,20 @@ class DataContorller {
         }
     }
 }
+
+extension DataContorller {
+    static func saveContextChanges(within interval: TimeInterval = 30){
+        guard interval > 0 else {
+            return
+        }
+        
+        if DataContorller.getContext().hasChanges {
+            try? DataContorller.getContext().save();
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + interval) {
+            self.saveContextChanges(within: interval);
+        }
+    }
+}
+

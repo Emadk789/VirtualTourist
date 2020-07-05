@@ -18,6 +18,7 @@ extension Pin {
     }
 
     @NSManaged public var data: Data?
+    @NSManaged public var annotation: NSObject?
     @NSManaged public var pin: Pins?
 
 }

@@ -26,6 +26,7 @@
 		695D979C24B01A670077AC06 /* Pin+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D979824B01A670077AC06 /* Pin+CoreDataProperties.swift */; };
 		695D979D24B01A670077AC06 /* Pins+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D979924B01A670077AC06 /* Pins+CoreDataClass.swift */; };
 		695D979E24B01A670077AC06 /* Pins+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D979A24B01A670077AC06 /* Pins+CoreDataProperties.swift */; };
+		697DF51F24B0E2D500CAFC89 /* Pin + Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697DF51E24B0E2D500CAFC89 /* Pin + Extra.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		695D979824B01A670077AC06 /* Pin+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pin+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		695D979924B01A670077AC06 /* Pins+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pins+CoreDataClass.swift"; sourceTree = "<group>"; };
 		695D979A24B01A670077AC06 /* Pins+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pins+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		697DF51E24B0E2D500CAFC89 /* Pin + Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pin + Extra.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 				695D977124AB8C550077AC06 /* Virtual_Tourist.xcdatamodeld */,
 				695D979124AFC4250077AC06 /* MapData.swift */,
 				695D979524B019DA0077AC06 /* DataContorller.swift */,
+				697DF51E24B0E2D500CAFC89 /* Pin + Extra.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 				695D976924AB8C550077AC06 /* AppDelegate.swift in Sources */,
 				695D978724ACD5760077AC06 /* PhotoAlbumCollectionViewCell.swift in Sources */,
 				695D979424AFD8690077AC06 /* DataProtocol.swift in Sources */,
+				697DF51F24B0E2D500CAFC89 /* Pin + Extra.swift in Sources */,
 				695D978F24AF417E0077AC06 /* SearchResonse.swift in Sources */,
 				695D978124ACA0B50077AC06 /* PhotoAlbumViewController.swift in Sources */,
 				695D976B24AB8C550077AC06 /* SceneDelegate.swift in Sources */,
@@ -386,7 +390,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FQ363JP6R5;
-				INFOPLIST_FILE = "Virtual Tourist/Info.plist";
+				INFOPLIST_FILE = "Virtual Tourist/View/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -404,7 +408,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FQ363JP6R5;
-				INFOPLIST_FILE = "Virtual Tourist/Info.plist";
+				INFOPLIST_FILE = "Virtual Tourist/View/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

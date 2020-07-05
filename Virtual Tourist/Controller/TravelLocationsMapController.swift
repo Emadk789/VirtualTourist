@@ -10,6 +10,7 @@ import Foundation
 import CoreLocation
 import UIKit
 import MapKit
+import CoreData
 
 class TravelLocationsMapController: UIViewController {
     
@@ -18,6 +19,9 @@ class TravelLocationsMapController: UIViewController {
     
     var annotations = [MKPointAnnotation]();
     var annotationView: MKAnnotationView! = nil;
+    
+    let pin: Pin = NSEntityDescription.insertNewObject(forEntityName: "Pin", into: DataContorller.getContext()) as! Pin
+    let pins: Pins = NSEntityDescription.insertNewObject(forEntityName: "Pins", into: DataContorller.getContext()) as! Pins
 
 
     override func viewDidLoad() {
@@ -25,6 +29,19 @@ class TravelLocationsMapController: UIViewController {
         mapView.delegate = self
         navigationController?.navigationBar.isHidden = true;
         gestureConfigurations();
+        
+        let fetchRequest: NSFetchRequest<Pins> = Pins.fetchRequest();
+        
+        do {
+            let searchResults = try DataContorller.getContext().fetch(fetchRequest);
+            let number = searchResults.count;
+            
+        } catch {
+            
+            print(error);
+        }
+        
+        
         
 //        FlickrClient.taskForGetRequest(lat: 24.774265, lon: 46.738586) { (bool, error) in
 //            
@@ -110,5 +127,12 @@ extension TravelLocationsMapController {
         
         annotations.append(annotation)
         mapView.addAnnotation(annotation);
+        
+        pin.annotation = annotation;
+        pins.addToPins(pin);
+        let mypin = pin;
+        let mypins = pins;
+        DataContorller.saveContext();
+
     }
 }
