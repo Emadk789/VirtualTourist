@@ -9,11 +9,10 @@
 import Foundation
 import UIKit;
 
+//  MARK: FlickrClient
 class FlickrClient {
-    //    static var flickrClient = FlickrClient();
     
-    
-    
+//  MARK: - EndPoints
     enum EndPoints {
         private static let APIKey = "dac2782929d09dc7ce384d36a901a0d8";
         private static let restBase = "https://www.flickr.com/services/rest/";
@@ -39,13 +38,10 @@ class FlickrClient {
             return URL(string: stringValue)!;
             
         }
-        
-        
     }
+    
+//  MARK: - taskForGetRequest
     static func taskForGetRequest<ResponseType: Decodable>(lat: Double, lon: Double, responseType: ResponseType.Type, page: Int = 1, perPage: Int = 10, completion: @escaping (ResponseType?,Error?)-> Void) {
-        print(EndPoints.searchWithNumberOfImages(lat, lon, page, perPage).stringValue);
-        print();
-//        let url = EndPoints.search(lat, lon).url;
         
         let url = EndPoints.searchWithNumberOfImages(lat, lon, page, perPage).url;
         
@@ -65,47 +61,24 @@ class FlickrClient {
                 DispatchQueue.main.async {
                     completion(result, nil);
                 }
-                
-                
             } catch {
-                print(error);
-//                print(responseType.self)
                 completion(nil, error);
             }
-            
         }
         task.resume()
     }
+    
+//  MARK: getImage
     static func getImage(photo: PhotoContent, compleation: @escaping([Data?], Error?)->Void) {
-//        var photosData: [Data?] = [];
-//        for photo in photos {
-            let url = EndPoints.requestImage(photo).url;
-            
-            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-//                guard error == nil else {
-//                    compleation(data, error);
-//                    return;
-//                }
-//                guard data != nil else {
-//                    compleation(nil, error)
-//                    return;
-//                }
-                MapData.data.append(data);
-//                PhotoAlbumCollectionViewController.collectionView.reloadData()
-                
-//                if photo == photos.last {
-                    DispatchQueue.main.async {
-                        compleation(MapData.data, nil);
-                    }
-//                }
-//            }
+        let url = EndPoints.requestImage(photo).url;
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            MapData.data.append(data);
+            DispatchQueue.main.async {
+                compleation(MapData.data, nil);
+            }
         }
-            task.resume();
-        
-        
-        
-        
-        
+        task.resume();
     }
     
 }
