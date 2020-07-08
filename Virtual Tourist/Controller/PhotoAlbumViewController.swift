@@ -20,13 +20,9 @@ class PhotoAlbumViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        test.conten
         mapView.delegate = self
 
         addAnnotation()
-        
-//        newCollectionButton.isEnabled = false;
-
     }
     
     func addAnnotation(){
