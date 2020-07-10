@@ -16,6 +16,7 @@ class DataContorller {
     
     static let shared = DataContorller(modelName: "Virtual_Tourist");
     
+    
     var viewContext: NSManagedObjectContext {
         return persistentContainer.viewContext;
     }
