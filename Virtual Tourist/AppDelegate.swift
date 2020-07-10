@@ -11,23 +11,27 @@ import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
+//    let dataController = DataController(modelName: "Mooskine")
+//    var dataController: DataController! = DataController.shared;
+    let dataController: DataContorller = DataContorller.shared;
+//    DataContorller(modelName: "Virtual_Tourist")
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        dataController.load()
         // Override point for customization after application launch.
 //        DataContorller.load();
 //        DataContorller.saveContext();
-        let fetchRequest: NSFetchRequest<Pins> = Pins.fetchRequest();
-        
-        do {
-            let searchResults = try DataContorller.getContext().fetch(fetchRequest);
-            let number = searchResults.count;
-            
-        } catch {
-            
-            print(error);
-        }
+    //        let fetchRequest: NSFetchRequest<Pins> = Pins.fetchRequest();
+    //
+    //        do {
+    //            let searchResults = try DataContorller.getContext().fetch(fetchRequest);
+    //            let number = searchResults.count;
+    //
+    //        } catch {
+    //
+    //            print(error);
+    //        }
         return true
     }
 
@@ -45,8 +49,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
     func applicationWillTerminate(_ application: UIApplication) {
-        DataContorller.saveContext();
+//        DataContorller.saveContext();
+        saveViewContext();
     }
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        saveViewContext();
+    }
+    
+    func saveViewContext() {
+        try? dataController.viewContext.save()
+    }
+       
 
 }
 

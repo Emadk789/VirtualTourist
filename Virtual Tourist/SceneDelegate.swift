@@ -50,8 +50,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Save changes in the application's managed object context when the application transitions to the background.
 //        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
 //        try? DataContorller.persistentContainer.viewContext.save();
-        DataContorller.saveContext();
+//        DataContorller.saveContext();
+//        try? dataController.viewContext.save();
     }
+//    func saveViewContext() {
+//        try? dataController.viewContext.save()
+//    }
     
 
 
