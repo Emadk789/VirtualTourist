@@ -30,6 +30,8 @@
 		697A72E524B917C5007B169C /* Pins+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697A72E124B917C5007B169C /* Pins+CoreDataProperties.swift */; };
 		697A72E824B9351A007B169C /* Annotation+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697A72E624B93519007B169C /* Annotation+CoreDataClass.swift */; };
 		697A72E924B9351A007B169C /* Annotation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697A72E724B93519007B169C /* Annotation+CoreDataProperties.swift */; };
+		697A72EB24B93C36007B169C /* Extra + UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697A72EA24B93C36007B169C /* Extra + UIViewController.swift */; };
+		697A72ED24B93C84007B169C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697A72EC24B93C84007B169C /* BaseViewController.swift */; };
 		697DF51F24B0E2D500CAFC89 /* Pin + Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697DF51E24B0E2D500CAFC89 /* Pin + Extra.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +61,8 @@
 		697A72E124B917C5007B169C /* Pins+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pins+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		697A72E624B93519007B169C /* Annotation+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Annotation+CoreDataClass.swift"; sourceTree = "<group>"; };
 		697A72E724B93519007B169C /* Annotation+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Annotation+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		697A72EA24B93C36007B169C /* Extra + UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extra + UIViewController.swift"; sourceTree = "<group>"; };
+		697A72EC24B93C84007B169C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		697DF51E24B0E2D500CAFC89 /* Pin + Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pin + Extra.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,6 +113,8 @@
 				695D978224ACBD170077AC06 /* PhotoAlbumCollectionViewController.swift */,
 				695D978624ACD5760077AC06 /* PhotoAlbumCollectionViewCell.swift */,
 				695D979324AFD8690077AC06 /* DataProtocol.swift */,
+				697A72EA24B93C36007B169C /* Extra + UIViewController.swift */,
+				697A72EC24B93C84007B169C /* BaseViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -243,12 +249,14 @@
 				695D977324AB8C550077AC06 /* Virtual_Tourist.xcdatamodeld in Sources */,
 				695D979624B019DA0077AC06 /* DataContorller.swift in Sources */,
 				697A72E524B917C5007B169C /* Pins+CoreDataProperties.swift in Sources */,
+				697A72ED24B93C84007B169C /* BaseViewController.swift in Sources */,
 				695D976D24AB8C550077AC06 /* TravelLocationsMapController.swift in Sources */,
 				695D976924AB8C550077AC06 /* AppDelegate.swift in Sources */,
 				694EE86B24B8DEC2006CEDAB /* TestEntity+CoreDataClass.swift in Sources */,
 				697A72E424B917C5007B169C /* Pins+CoreDataClass.swift in Sources */,
 				695D978724ACD5760077AC06 /* PhotoAlbumCollectionViewCell.swift in Sources */,
 				697A72E324B917C5007B169C /* Pin+CoreDataProperties.swift in Sources */,
+				697A72EB24B93C36007B169C /* Extra + UIViewController.swift in Sources */,
 				695D979424AFD8690077AC06 /* DataProtocol.swift in Sources */,
 				697DF51F24B0E2D500CAFC89 /* Pin + Extra.swift in Sources */,
 				695D978F24AF417E0077AC06 /* SearchResonse.swift in Sources */,

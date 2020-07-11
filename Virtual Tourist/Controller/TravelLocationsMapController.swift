@@ -12,7 +12,7 @@ import UIKit
 import MapKit
 import CoreData
 
-class TravelLocationsMapController: UIViewController {
+class TravelLocationsMapController: BaseViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     let locationManager =  CLLocationManager()
@@ -21,7 +21,7 @@ class TravelLocationsMapController: UIViewController {
     var annotations = [Annotation]();
     var annotationView: MKAnnotationView! = nil;
     
-    var dataContorller: DataContorller = DataContorller.shared;
+    
     
 //    let pin: Pin = NSEntityDescription.insertNewObject(forEntityName: "Pin", into: DataContorller.getContext()) as! Pin
 //    let pins: Pins = NSEntityDescription.insertNewObject(forEntityName: "Pins", into: DataContorller.getContext()) as! Pins
@@ -145,11 +145,13 @@ extension TravelLocationsMapController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
 //        annotationView = view;
+        BaseViewController.setCurrentAnnotation(lat: (view.annotation?.coordinate.latitude)!, lon: (view.annotation?.coordinate.longitude)!);
+        
         let photoAlbumViewController = storyboard!.instantiateViewController(withIdentifier: "PhotoAlbumViewController") as! PhotoAlbumViewController;
         navigationController?.navigationBar.isHidden = false;
         
         let x = view.annotation as! MKPointAnnotation;
-        MapData.annotation = view.annotation as! MKPointAnnotation;
+//        MapData.annotation = view.annotation as! MKPointAnnotation;
         photoAlbumViewController.annotation = view.annotation as! MKPointAnnotation;
         navigationController?.pushViewController(photoAlbumViewController, animated: true);
         

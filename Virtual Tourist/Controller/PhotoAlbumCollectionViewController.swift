@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import CoreData;
 
 private let reuseIdentifier = "Cell"
 
 class PhotoAlbumCollectionViewController: UICollectionViewController {
     
     var dataProtocolDelegate: DataProtocol!;
+    
+    var dataContorller: DataContorller = DataContorller.shared;
     
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -21,6 +24,7 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
     
     func configurCollectionView(){
         dataProtocolDelegate?.willStartDownloadeData();
+        dataContorller.
         FlickrClient.taskForGetRequest(lat: (MapData.annotation.coordinate.latitude), lon: (MapData.annotation.coordinate.longitude), responseType: SearchResponse.self, page: 1, perPage: 50, completion: self.handelRestResponse(response:error:))
         }
     
@@ -43,6 +47,19 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
     func handelImageResponse(data: [Data?], error: Error?){
         collectionView.reloadData()
         dataProtocolDelegate?.didFinishDownloadeData();
+    }
+    
+    func makeFetchRequest(){
+//        BaseViewController.Coordinate.lat;
+        let fetchRequest: NSFetchRequest<Annotation> = Annotation.fetchRequest();
+        let predicate: NSPredicate = NSPredicate(format: "lat", arguments: "")
+        
+        do {
+            let searchResults = try dataContorller.viewContext.fetch(fetchRequest);
+            annotations = searchResults;
+        } catch {
+            print(fatalError());
+        }
     }
     
     

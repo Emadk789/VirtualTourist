@@ -9,7 +9,7 @@
 import UIKit
 import MapKit;
 
-class PhotoAlbumViewController: UIViewController {
+class PhotoAlbumViewController: BaseViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     
