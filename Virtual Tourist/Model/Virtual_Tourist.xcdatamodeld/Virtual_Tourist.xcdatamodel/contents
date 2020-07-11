@@ -1,15 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Annotation" representedClassName="Annotation" syncable="YES">
+        <attribute name="data" optional="YES" attributeType="Binary"/>
+        <attribute name="lat" optional="YES" attributeType="String"/>
+        <attribute name="lon" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="Pin" representedClassName="Pin" syncable="YES">
+        <attribute name="data" optional="YES" attributeType="Binary"/>
+        <attribute name="lat" optional="YES" attributeType="String"/>
+        <attribute name="lon" optional="YES" attributeType="String"/>
+        <relationship name="pin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pins" inverseName="pins" inverseEntity="Pins"/>
+    </entity>
+    <entity name="Pin2" representedClassName="Pin2" syncable="YES">
         <attribute name="annotation" optional="YES" attributeType="Transformable"/>
         <attribute name="data" optional="YES" attributeType="Binary"/>
-        <relationship name="pin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pins" inverseName="pins" inverseEntity="Pins"/>
+        <relationship name="pin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pins2" inverseName="pins" inverseEntity="Pins2"/>
     </entity>
     <entity name="Pins" representedClassName="Pins" syncable="YES">
         <relationship name="pins" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Pin" inverseName="pin" inverseEntity="Pin"/>
     </entity>
+    <entity name="Pins2" representedClassName="Pins2" syncable="YES">
+        <relationship name="pins" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Pin2" inverseName="pin" inverseEntity="Pin2"/>
+    </entity>
+    <entity name="TestEntity" representedClassName="TestEntity" syncable="YES">
+        <attribute name="age" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="trans" optional="YES" attributeType="Transformable"/>
+    </entity>
     <elements>
-        <element name="Pin" positionX="-50.90234375" positionY="68.79296875" width="128" height="88"/>
-        <element name="Pins" positionX="-251.37109375" positionY="110.60546875" width="128" height="58"/>
+        <element name="Annotation" positionX="-62.28125" positionY="240.828125" width="128" height="88"/>
+        <element name="Pin" positionX="-44.6328125" positionY="348.7421875" width="128" height="103"/>
+        <element name="Pin2" positionX="-50.90234375" positionY="68.79296875" width="128" height="88"/>
+        <element name="Pins" positionX="-260.421875" positionY="356.265625" width="128" height="58"/>
+        <element name="Pins2" positionX="-251.37109375" positionY="110.60546875" width="128" height="58"/>
+        <element name="TestEntity" positionX="-256.2890625" positionY="209.73828125" width="128" height="88"/>
     </elements>
 </model>

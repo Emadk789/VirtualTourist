@@ -9,6 +9,13 @@
 import Foundation
 import MapKit
 
-extension Pin {
+class AnnotationTest: NSCoding {
+    let lat: String;
+    func encode(with coder: NSCoder) {
+        
+    }
+    
+    required init?(coder: NSCoder) {lat = ""}
+    
 
 }

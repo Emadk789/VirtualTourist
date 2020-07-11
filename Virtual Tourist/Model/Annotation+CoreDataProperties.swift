@@ -1,5 +1,5 @@
 //
-//  Pin+CoreDataProperties.swift
+//  Annotation+CoreDataProperties.swift
 //  Virtual Tourist
 //
 //  Created by Emad Albarnawi on 11/07/2020.
@@ -11,14 +11,14 @@ import Foundation
 import CoreData
 
 
-extension Pin {
+extension Annotation {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Pin> {
-        return NSFetchRequest<Pin>(entityName: "Pin")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Annotation> {
+        return NSFetchRequest<Annotation>(entityName: "Annotation")
     }
 
     @NSManaged public var lat: String?
     @NSManaged public var lon: String?
-    @NSManaged public var pin: Pins?
+    @NSManaged public var data: Data?
 
 }

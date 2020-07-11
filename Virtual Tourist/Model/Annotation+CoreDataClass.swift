@@ -1,5 +1,5 @@
 //
-//  Pin+CoreDataClass.swift
+//  Annotation+CoreDataClass.swift
 //  Virtual Tourist
 //
 //  Created by Emad Albarnawi on 11/07/2020.
@@ -10,7 +10,7 @@
 import Foundation
 import CoreData
 
-@objc(Pin)
-public class Pin: NSManagedObject {
+@objc(Annotation)
+public class Annotation: NSManagedObject {
 
 }

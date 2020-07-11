@@ -17,13 +17,15 @@ class TravelLocationsMapController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     let locationManager =  CLLocationManager()
     
-    var annotations = [MKPointAnnotation]();
+    var mapAnnotations = [MKPointAnnotation]();
+    var annotations = [Annotation]();
     var annotationView: MKAnnotationView! = nil;
     
     var dataContorller: DataContorller = DataContorller.shared;
     
 //    let pin: Pin = NSEntityDescription.insertNewObject(forEntityName: "Pin", into: DataContorller.getContext()) as! Pin
 //    let pins: Pins = NSEntityDescription.insertNewObject(forEntityName: "Pins", into: DataContorller.getContext()) as! Pins
+    
 
 
     override func viewDidLoad() {
@@ -32,22 +34,80 @@ class TravelLocationsMapController: UIViewController {
         navigationController?.navigationBar.isHidden = true;
         gestureConfigurations();
         
-//        let fetchRequest: NSFetchRequest<Pins> = Pins.fetchRequest();
+        
+//        let pin = Pin(context: dataContorller.viewContext);
+//        pin.lat = "25.774265";
+//        pin.lon = "47.738586";
+//        let pins = Pins(context: dataContorller.viewContext);
+//        pins.addToPins(pin);
+        
+//        let test = TestEntity(context: dataContorller.viewContext)
+//        test.name = "AnnotationTest";
+//        test.age = "422";
+        
+//        let myAnnotation: MKPointAnnotation = MKPointAnnotation();
+////        myAnnotation.coordinate.latitude = 24.774265;
+////        myAnnotation.coordinate.longitude = 46.738586;
 //
-//        do {
-//            let searchResults = try DataContorller.getContext().fetch(fetchRequest);
-//            let number = searchResults.count;
+//        myAnnotation.coordinate.latitude = 24;
+//        myAnnotation.coordinate.longitude = 46;
+//        test.trans = myAnnotation;
+//        try? dataContorller.viewContext.save();
+        
+        let fetchRequest: NSFetchRequest<Annotation> = Annotation.fetchRequest();
+        
+        do {
+            let searchResults = try dataContorller.viewContext.fetch(fetchRequest);
+            annotations = searchResults;
+        } catch {
+            print(fatalError());
+        }
+        
+        let fetchRequest1: NSFetchRequest<Pin> = Pin.fetchRequest();
+        let fetchRequest2: NSFetchRequest<Pins> = Pins.fetchRequest();
+//        let predicate: NSPredicate =  NSPredicate(format: "pin == %@", pins);
+//        fetchRequest1.predicate = predicate;
+//        let predicate: NSPredicate =  NSPredicate(format: "name == %@", "AnnotationTest");
+//        fetchRequest.predicate = predicate;
+        
+
+        do {
+            let searchResults = try dataContorller.viewContext.fetch(fetchRequest2);
+            let number = searchResults.count;
+            for myPin in searchResults {
+                print(myPin.pins);
+//                print(myPin.lon!);
+                
+            }
+//            let name = searchResults ;
+//            for n in name {
+////                print(n.name!);
+//                print(n.age!);
+//                let annotation = n.trans as! MKPointAnnotation;
 //
-//        } catch {
-//
-//            print(error);
-//        }
+//                print(annotation.coordinate);
+//            }
+            print(number);
+        } catch {
+
+            print(error);
+        }
         
         
-        
+        updateAnnotations();
 //        FlickrClient.taskForGetRequest(lat: 24.774265, lon: 46.738586) { (bool, error) in
 //            
 //        }
+    }
+    func updateAnnotations(){
+        for i in annotations {
+            let annotation = MKPointAnnotation();
+            annotation.coordinate.latitude = Double(i.lat!)!;
+            annotation.coordinate.longitude = Double(i.lon!)!;
+            mapAnnotations.append(annotation)
+            mapView.addAnnotation(annotation);
+        }
+        
     }
     
     
@@ -127,9 +187,20 @@ extension TravelLocationsMapController {
         let annotation = MKPointAnnotation();
         annotation.coordinate = touchMapCoordinate;
         
-        annotations.append(annotation)
+        mapAnnotations.append(annotation)
         mapView.addAnnotation(annotation);
         
+        let annotationToAdd = Annotation(context: dataContorller.viewContext);
+        annotationToAdd.lat = String(annotation.coordinate.latitude);
+        annotationToAdd.lon = String(annotation.coordinate.longitude);
+        
+//        TODO: Catch the error!
+        try? dataContorller.viewContext.save()
+        
+//        let test = TestEntity(context: dataContorller.viewContext)
+//        test.name = "Emad";
+//        test.age = "22";
+//        try? dataContorller.viewContext.save();
 //        pin.annotation = annotation;
 //        pins.addToPins(pin);
 //        let mypin = pin;
