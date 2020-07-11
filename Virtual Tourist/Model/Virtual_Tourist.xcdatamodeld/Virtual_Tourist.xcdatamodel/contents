@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Annotation" representedClassName="Annotation" syncable="YES">
-        <attribute name="data" optional="YES" attributeType="Binary"/>
+        <attribute name="data" optional="YES" attributeType="Transformable" customClassName="[Data]"/>
         <attribute name="lat" optional="YES" attributeType="String"/>
         <attribute name="lon" optional="YES" attributeType="String"/>
     </entity>
@@ -24,6 +24,7 @@
     </entity>
     <entity name="TestEntity" representedClassName="TestEntity" syncable="YES">
         <attribute name="age" optional="YES" attributeType="String"/>
+        <attribute name="data" optional="YES" attributeType="Transformable" customClassName="[Data]"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="trans" optional="YES" attributeType="Transformable"/>
     </entity>
@@ -33,6 +34,6 @@
         <element name="Pin2" positionX="-50.90234375" positionY="68.79296875" width="128" height="88"/>
         <element name="Pins" positionX="-260.421875" positionY="356.265625" width="128" height="58"/>
         <element name="Pins2" positionX="-251.37109375" positionY="110.60546875" width="128" height="58"/>
-        <element name="TestEntity" positionX="-256.2890625" positionY="209.73828125" width="128" height="88"/>
+        <element name="TestEntity" positionX="-256.2890625" positionY="209.73828125" width="128" height="103"/>
     </elements>
 </model>

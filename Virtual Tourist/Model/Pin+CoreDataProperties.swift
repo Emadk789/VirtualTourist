@@ -17,6 +17,7 @@ extension Pin {
         return NSFetchRequest<Pin>(entityName: "Pin")
     }
 
+    @NSManaged public var data: Data?
     @NSManaged public var lat: String?
     @NSManaged public var lon: String?
     @NSManaged public var pin: Pins?

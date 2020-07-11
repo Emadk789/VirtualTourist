@@ -2,7 +2,7 @@
 //  TestEntity+CoreDataProperties.swift
 //  Virtual Tourist
 //
-//  Created by Emad Albarnawi on 10/07/2020.
+//  Created by Emad Albarnawi on 11/07/2020.
 //  Copyright © 2020 Emad Albarnawi. All rights reserved.
 //
 //
@@ -18,6 +18,7 @@ extension TestEntity {
     }
 
     @NSManaged public var age: String?
+    @NSManaged public var data: [Data]?
     @NSManaged public var name: String?
     @NSManaged public var trans: NSObject?
 

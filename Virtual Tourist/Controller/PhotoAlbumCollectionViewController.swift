@@ -17,16 +17,34 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
     
     var dataContorller: DataContorller = DataContorller.shared;
     
+    var annotation: Annotation!;
+    
     override func viewDidLoad() {
         super.viewDidLoad();
+        makeFetchRequest();
         configurCollectionView();
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated);
+        collectionView.reloadData();
     }
     
     func configurCollectionView(){
         dataProtocolDelegate?.willStartDownloadeData();
-        dataContorller.
-        FlickrClient.taskForGetRequest(lat: (MapData.annotation.coordinate.latitude), lon: (MapData.annotation.coordinate.longitude), responseType: SearchResponse.self, page: 1, perPage: 50, completion: self.handelRestResponse(response:error:))
+//      TODO: Make the FlickrRequest if the data of the annotation is empty.
+//              Otherwise display the data.
+        
+        if let data = annotation.data {
+            return;
         }
+//        TODO: Double check how are you storing the images Data.
+//        TODO: Also, reloade the correct data when calling viewWillApper(_:);
+        
+        FlickrClient.taskForGetRequest(lat: Double(annotation.lat!)!, lon: Double(annotation.lon!)!, responseType: SearchResponse.self, page: 1, perPage: 50, completion: self.handelRestResponse(response:error:));
+//        FlickrClient.taskForGetRequest(lat: (MapData.annotation.coordinate.latitude), lon: (MapData.annotation.coordinate.longitude), responseType: SearchResponse.self, page: 1, perPage: 50, completion: self.handelRestResponse(response:error:));
+        
+    }
     
     func handelRestResponse(response: SearchResponse?, error: Error?){
         guard response?.photos.photo != [] else {
@@ -37,7 +55,7 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
         }
         for photo in (response?.photos.photo)! {
             
-            FlickrClient.getImage(photo: photo, compleation: self.handelImageResponse(data:error:));
+            FlickrClient.getImage(photo: photo, annotation: annotation, compleation: self.handelImageResponse(data:error:));
             collectionView.reloadData()
             
         }
@@ -52,11 +70,18 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
     func makeFetchRequest(){
 //        BaseViewController.Coordinate.lat;
         let fetchRequest: NSFetchRequest<Annotation> = Annotation.fetchRequest();
-        let predicate: NSPredicate = NSPredicate(format: "lat", arguments: "")
+        let lat = BaseViewController.Coordinate.lat.value;
+        let lon = BaseViewController.Coordinate.lon.value;
+        let predicateLat: NSPredicate = NSPredicate(format: "lat == %@", String(lat));
+        let predicateLon: NSPredicate = NSPredicate(format: "lon == %@", String(lon));
+        let compoundPredicate = NSCompoundPredicate(type: .and, subpredicates: [predicateLat, predicateLon])
+        fetchRequest.predicate = compoundPredicate;
+//        let predicate: NSPredicate = NSPredicate(format: "lat", arguments:  BaseViewController.Coordinate.lat);
         
         do {
             let searchResults = try dataContorller.viewContext.fetch(fetchRequest);
-            annotations = searchResults;
+            let currentAnnotation = searchResults[0];
+            annotation = currentAnnotation;
         } catch {
             print(fatalError());
         }
@@ -65,12 +90,19 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
     
     // MARK:- UICollectionViewDataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return MapData.data.count;
+//        return MapData.data.count;
+        return annotation.data?.count ?? 0;
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PhotoAlbumCollectionViewCell;
-        guard let data = MapData.data[indexPath.row] else {
+//        guard let data = MapData.data[indexPath.row] else {
+//            return cell
+//        }
+//        let image = UIImage(data: data);
+//        cell.imageView.image = image
+//        return cell;
+        guard let data = annotation.data?[indexPath.row] else {
             return cell
         }
         let image = UIImage(data: data);

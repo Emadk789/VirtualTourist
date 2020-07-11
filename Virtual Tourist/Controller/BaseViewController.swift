@@ -14,6 +14,7 @@ class BaseViewController: UIViewController {
     var dataContorller: DataContorller = DataContorller.shared;
     private static var coordinate = ["lat": 0.0, "lon": 0.0];
     
+    
     enum Coordinate: Double {
         case lat, lon;
         
@@ -36,7 +37,7 @@ class BaseViewController: UIViewController {
 //        coordinate["lat"] = Double(lat)!;
 //        coordinate["lat"] = Double(lon)!;
         coordinate["lat"] = lat;
-        coordinate["lat"] = lon;
+        coordinate["lon"] = lon;
     }
 
 }

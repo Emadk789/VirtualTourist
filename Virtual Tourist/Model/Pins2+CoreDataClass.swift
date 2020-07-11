@@ -1,5 +1,5 @@
 //
-//  TestEntity+CoreDataClass.swift
+//  Pins2+CoreDataClass.swift
 //  Virtual Tourist
 //
 //  Created by Emad Albarnawi on 11/07/2020.
@@ -10,7 +10,7 @@
 import Foundation
 import CoreData
 
-@objc(TestEntity)
-public class TestEntity: NSManagedObject {
+@objc(Pins2)
+public class Pins2: NSManagedObject {
 
 }

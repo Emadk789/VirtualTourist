@@ -15,7 +15,7 @@ class DataContorller {
     let persistentContainer: NSPersistentContainer;
     
     static let shared = DataContorller(modelName: "Virtual_Tourist");
-    
+    var annotations = [Annotation]();
     
     var viewContext: NSManagedObjectContext {
         return persistentContainer.viewContext;
@@ -59,6 +59,16 @@ class DataContorller {
                self.autoSaveViewContext(interval: interval)
            }
        }
+    func fetchAnnotations(){
+        let fetchRequest: NSFetchRequest<Annotation> = Annotation.fetchRequest();
+        
+        do {
+            let searchResults = try viewContext.fetch(fetchRequest);
+            annotations = searchResults;
+        } catch {
+            print(fatalError());
+        }
+    }
     
 //        static func saveContext () {
 ////            persistentContainer.viewContext

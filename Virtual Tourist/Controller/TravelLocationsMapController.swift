@@ -18,7 +18,7 @@ class TravelLocationsMapController: BaseViewController {
     let locationManager =  CLLocationManager()
     
     var mapAnnotations = [MKPointAnnotation]();
-    var annotations = [Annotation]();
+    
     var annotationView: MKAnnotationView! = nil;
     
     
@@ -54,14 +54,27 @@ class TravelLocationsMapController: BaseViewController {
 //        test.trans = myAnnotation;
 //        try? dataContorller.viewContext.save();
         
-        let fetchRequest: NSFetchRequest<Annotation> = Annotation.fetchRequest();
+//        TestEntity
+//        let fetchRequest: NSFetchRequest<TestEntity> = TestEntity.fetchRequest();
+//        
+//        do {
+//            let searchResults = try dataContorller.viewContext.fetch(fetchRequest);
+//            searchResults[0].data.
+//        } catch {
+//            print(fatalError());
+//        }
         
-        do {
-            let searchResults = try dataContorller.viewContext.fetch(fetchRequest);
-            annotations = searchResults;
-        } catch {
-            print(fatalError());
-        }
+//        Fetch Annotation
+        
+//        let fetchRequest: NSFetchRequest<Annotation> = Annotation.fetchRequest();
+//
+//        do {
+//            let searchResults = try dataContorller.viewContext.fetch(fetchRequest);
+//            dataContorller.annotations = searchResults;
+//        } catch {
+//            print(fatalError());
+//        }
+        dataContorller.fetchAnnotations();
         
         let fetchRequest1: NSFetchRequest<Pin> = Pin.fetchRequest();
         let fetchRequest2: NSFetchRequest<Pins> = Pins.fetchRequest();
@@ -100,7 +113,7 @@ class TravelLocationsMapController: BaseViewController {
 //        }
     }
     func updateAnnotations(){
-        for i in annotations {
+        for i in dataContorller.annotations {
             let annotation = MKPointAnnotation();
             annotation.coordinate.latitude = Double(i.lat!)!;
             annotation.coordinate.longitude = Double(i.lon!)!;
@@ -145,7 +158,10 @@ extension TravelLocationsMapController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
 //        annotationView = view;
-        BaseViewController.setCurrentAnnotation(lat: (view.annotation?.coordinate.latitude)!, lon: (view.annotation?.coordinate.longitude)!);
+        let lat = (view.annotation?.coordinate.latitude)!;
+        let lon = (view.annotation?.coordinate.longitude)!;
+        
+        BaseViewController.setCurrentAnnotation(lat: lat, lon: lon);
         
         let photoAlbumViewController = storyboard!.instantiateViewController(withIdentifier: "PhotoAlbumViewController") as! PhotoAlbumViewController;
         navigationController?.navigationBar.isHidden = false;
@@ -195,6 +211,8 @@ extension TravelLocationsMapController {
         let annotationToAdd = Annotation(context: dataContorller.viewContext);
         annotationToAdd.lat = String(annotation.coordinate.latitude);
         annotationToAdd.lon = String(annotation.coordinate.longitude);
+        
+        
         
 //        TODO: Catch the error!
         try? dataContorller.viewContext.save()

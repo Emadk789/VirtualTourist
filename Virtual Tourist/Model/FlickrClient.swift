@@ -10,7 +10,9 @@ import Foundation
 import UIKit;
 
 //  MARK: FlickrClient
-class FlickrClient {
+class FlickrClient: BaseViewController {
+    
+    private static let dataContorller: DataContorller = DataContorller.shared;
     
 //  MARK: - EndPoints
     enum EndPoints {
@@ -69,11 +71,20 @@ class FlickrClient {
     }
     
 //  MARK: getImage
-    static func getImage(photo: PhotoContent, compleation: @escaping([Data?], Error?)->Void) {
+    static func getImage(photo: PhotoContent, annotation: Annotation, compleation: @escaping([Data?], Error?)->Void) {
         let url = EndPoints.requestImage(photo).url;
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+//            TODO: Handel the error!
+            
             MapData.data.append(data);
+//            dataContorller.Annotation.data.append(data);
+//            dataContorller.annotations.
+//            BaseViewController.Coordinate.
+            annotation.data?.append(data!);
+            
+//            TODO: Handel the error!!
+            try? dataContorller.viewContext.save()
             DispatchQueue.main.async {
                 compleation(MapData.data, nil);
             }
