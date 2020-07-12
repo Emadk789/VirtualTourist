@@ -105,9 +105,7 @@ class TravelLocationsMapController: BaseViewController {
 //
 //            print(error);
 //        }
-        
-        
-        updateAnnotations();
+    
 //        FlickrClient.taskForGetRequest(lat: 24.774265, lon: 46.738586) { (bool, error) in
 //            
 //        }
@@ -116,11 +114,17 @@ class TravelLocationsMapController: BaseViewController {
         super.viewWillAppear(animated);
 //        navigationController?.navigationBar.isHidden = true;
 //        navigationController?.topViewController
-        navigationController?.setNavigationBarHidden(true, animated: true);
+        updateAnnotations();
+        navigationController?.setNavigationBarHidden(true, animated: animated);
         
         gestureConfigurations();
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated);
+        navigationController?.setNavigationBarHidden(false, animated: animated);
+    }
     func updateAnnotations(){
+        mapView.removeAnnotations(mapAnnotations);
         for i in dataContorller.annotations {
             let annotation = MKPointAnnotation();
             annotation.coordinate.latitude = Double(i.lat!)!;
@@ -181,6 +185,17 @@ extension TravelLocationsMapController: MKMapViewDelegate {
         
         
     }
+//    func updateMapView(){
+//        let touchPoint = gestureRecognizer.location(in: mapView)
+//                let touchMapCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
+//
+//        //        Get the location coordinate
+//                let annotation = MKPointAnnotation();
+//                annotation.coordinate = touchMapCoordinate;
+//
+//                mapAnnotations.append(annotation)
+//                mapView.addAnnotation(annotation);
+//    }
 //    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
 //
 //    }
