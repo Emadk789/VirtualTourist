@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		692B534324BACDD4000D286A /* Pin+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692B533F24BACDD4000D286A /* Pin+CoreDataClass.swift */; };
+		692B534424BACDD4000D286A /* Pin+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692B534024BACDD4000D286A /* Pin+CoreDataProperties.swift */; };
+		692B534524BACDD4000D286A /* Photo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692B534124BACDD4000D286A /* Photo+CoreDataClass.swift */; };
+		692B534624BACDD4000D286A /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692B534224BACDD4000D286A /* Photo+CoreDataProperties.swift */; };
 		695D976924AB8C550077AC06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D976824AB8C550077AC06 /* AppDelegate.swift */; };
 		695D976B24AB8C550077AC06 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D976A24AB8C550077AC06 /* SceneDelegate.swift */; };
 		695D976D24AB8C550077AC06 /* TravelLocationsMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D976C24AB8C550077AC06 /* TravelLocationsMapController.swift */; };
@@ -30,6 +34,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		692B533F24BACDD4000D286A /* Pin+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pin+CoreDataClass.swift"; sourceTree = "<group>"; };
+		692B534024BACDD4000D286A /* Pin+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pin+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		692B534124BACDD4000D286A /* Photo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		692B534224BACDD4000D286A /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		695D976524AB8C550077AC06 /* Virtual Tourist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Virtual Tourist.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		695D976824AB8C550077AC06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		695D976A24AB8C550077AC06 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -147,6 +155,10 @@
 		695D979024AFC40A0077AC06 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				692B533F24BACDD4000D286A /* Pin+CoreDataClass.swift */,
+				692B534024BACDD4000D286A /* Pin+CoreDataProperties.swift */,
+				692B534124BACDD4000D286A /* Photo+CoreDataClass.swift */,
+				692B534224BACDD4000D286A /* Photo+CoreDataProperties.swift */,
 				697A734024BA5DB8007B169C /* Annotation+CoreDataClass.swift */,
 				697A734124BA5DB8007B169C /* Annotation+CoreDataProperties.swift */,
 				695D979124AFC4250077AC06 /* MapData.swift */,
@@ -228,6 +240,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				692B534624BACDD4000D286A /* Photo+CoreDataProperties.swift in Sources */,
 				695D979624B019DA0077AC06 /* DataContorller.swift in Sources */,
 				697A72ED24B93C84007B169C /* BaseViewController.swift in Sources */,
 				697A733F24BA5CF1007B169C /* VirtualTourist.xcdatamodeld in Sources */,
@@ -237,7 +250,10 @@
 				697A72EB24B93C36007B169C /* Extra + UIViewController.swift in Sources */,
 				695D979424AFD8690077AC06 /* DataProtocol.swift in Sources */,
 				697A734224BA5DB8007B169C /* Annotation+CoreDataClass.swift in Sources */,
+				692B534324BACDD4000D286A /* Pin+CoreDataClass.swift in Sources */,
+				692B534524BACDD4000D286A /* Photo+CoreDataClass.swift in Sources */,
 				697DF51F24B0E2D500CAFC89 /* Pin + Extra.swift in Sources */,
+				692B534424BACDD4000D286A /* Pin+CoreDataProperties.swift in Sources */,
 				695D978F24AF417E0077AC06 /* SearchResonse.swift in Sources */,
 				697A734324BA5DB8007B169C /* Annotation+CoreDataProperties.swift in Sources */,
 				695D978124ACA0B50077AC06 /* PhotoAlbumViewController.swift in Sources */,

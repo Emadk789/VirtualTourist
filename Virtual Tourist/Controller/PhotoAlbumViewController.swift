@@ -18,6 +18,9 @@ class PhotoAlbumViewController: BaseViewController {
 //    @IBOutlet weak var newCollectionButton: UIButton!
     @IBOutlet weak var test: UIView!
     
+    
+    var pin: Pin!;
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
@@ -29,11 +32,6 @@ class PhotoAlbumViewController: BaseViewController {
         currentAnnotation = getCurrentAnnotation(dataController: dataController);
         currentAnnotation.data! = [];
         //        TODO: Update the CollectionView to be empty.
-        makeFlickrRequest();
-    }
-    func makeFlickrRequest(){
-//        willStartDownloadeData();
-//        FlickrClient.taskForGetRequest(lat: Double(currentAnnotation.lat!)!, lon: Double(currentAnnotation.lon!)!, responseType: SearchResponse.self, page: 1, perPage: 50, completion: self.handelRestResponse(response:error:));
     }
     
 //    func handelRestResponse(response: SearchResponse?, error: Error?){
@@ -69,6 +67,8 @@ class PhotoAlbumViewController: BaseViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ToPhotoAlbumCollectionViewController" {
             let photoAlbumCollectionViewController = segue.destination as! PhotoAlbumCollectionViewController;
+//            dataController.fetchPins();
+//            photoAlbumCollectionViewController.pin = pin;
 //            photoAlbumCollectionViewController.dataProtocolDelegate = self;
         }
     }

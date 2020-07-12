@@ -22,11 +22,16 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
     var dataController: DataContorller = DataContorller.shared;
     
     var annotation: Annotation!;
+    
 //    var annotations: [Annotation]!;
+    var pin: Pin!;
+    var photos: [Photo]!;
     
     override func viewDidLoad() {
         super.viewDidLoad();
         annotation = getCurrentAnnotation(dataController: dataController);
+        pin = dataController.getCurrentPin(dataController: dataController);
+        dataController.fetchPhotos(pin: pin);
         configurCollectionView();
         
         
@@ -66,6 +71,13 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
 //            dataProtocolDelegate?.didFinishDownloadeData();
             return;
         }
+        
+        let data2 = photos;
+        if data2 != [] {
+            return;
+        }
+//        TODO: Make the photo NSMangedObject in the request.
+
 //        if let data = annotation.data {
 //            return;
 //        }
@@ -87,8 +99,11 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
             return
         }
         for photo in (response?.photos.photo)! {
+            let myPhoto = Photo(context: dataController.viewContext);
+            myPhoto.data = [];
+            pin.addToPhotos(myPhoto);
             
-            FlickrClient.getImage(photo: photo, annotation: annotation, compleation: self.handelImageResponse(data:error:));
+            FlickrClient.getImage(photo: photo, annotation: annotation, myPhoto: myPhoto, compleation: self.handelImageResponse(data:error:));
             collectionView.reloadData();
             
         }

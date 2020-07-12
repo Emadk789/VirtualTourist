@@ -71,7 +71,7 @@ class FlickrClient: BaseViewController {
     }
     
 //  MARK: getImage
-    static func getImage(photo: PhotoContent, annotation: Annotation, compleation: @escaping([Data?], Error?)->Void) {
+    static func getImage(photo: PhotoContent, annotation: Annotation, myPhoto: Photo, compleation: @escaping([Data?], Error?)->Void) {
         let url = EndPoints.requestImage(photo).url;
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -84,6 +84,10 @@ class FlickrClient: BaseViewController {
             annotation.data!.append(data!);
             let coreData = annotation.data!;
             
+            
+//            dataContorller.pin.photos[0].data!.append(data!);
+            myPhoto.data![0].append(data!);
+            let testCoreData = myPhoto.data!;
 
             DispatchQueue.main.async {
                 compleation(MapData.data, nil);

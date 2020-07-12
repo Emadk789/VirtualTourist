@@ -174,6 +174,8 @@ extension TravelLocationsMapController: MKMapViewDelegate {
         let lon = (view.annotation?.coordinate.longitude)!;
         
         BaseViewController.setCurrentAnnotation(lat: lat, lon: lon);
+//        dataController.fetchPins();
+        
         
         let photoAlbumViewController = storyboard!.instantiateViewController(withIdentifier: "PhotoAlbumViewController") as! PhotoAlbumViewController;
         navigationController?.navigationBar.isHidden = false;
@@ -181,6 +183,10 @@ extension TravelLocationsMapController: MKMapViewDelegate {
         let x = view.annotation as! MKPointAnnotation;
 //        MapData.annotation = view.annotation as! MKPointAnnotation;
         photoAlbumViewController.annotation = view.annotation as! MKPointAnnotation;
+        
+        
+//        dataController.pins[]
+        
         navigationController?.pushViewController(photoAlbumViewController, animated: true);
         
         
@@ -240,9 +246,21 @@ extension TravelLocationsMapController {
         annotationToAdd.data = [];
         
         
-//        TODO: Catch the error!
-        try? dataController.viewContext.save()
+
         
+        
+        let pin = Pin(context: dataController.viewContext);
+               pin.lat = String(annotation.coordinate.latitude);
+               pin.lon = String(annotation.coordinate.longitude);
+        
+//        let photo = Photo(context: dataController.viewContext);
+//        photo.data = [];
+//        pin.addToPhotos(photo);
+        
+        
+        
+        //        TODO: Catch the error!
+        try? dataController.viewContext.save()
 //        let test = TestEntity(context: dataContorller.viewContext)
 //        test.name = "Emad";
 //        test.age = "22";
