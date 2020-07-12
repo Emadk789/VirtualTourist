@@ -74,7 +74,7 @@ class TravelLocationsMapController: BaseViewController {
 //        } catch {
 //            print(fatalError());
 //        }
-        dataContorller.fetchAnnotations();
+        dataController.fetchAnnotations();
         
 //        let fetchRequest1: NSFetchRequest<Pin> = Pin.fetchRequest();
 //        let fetchRequest2: NSFetchRequest<Pins> = Pins.fetchRequest();
@@ -125,7 +125,7 @@ class TravelLocationsMapController: BaseViewController {
     }
     func updateAnnotations(){
         mapView.removeAnnotations(mapAnnotations);
-        for i in dataContorller.annotations {
+        for i in dataController.annotations {
             let annotation = MKPointAnnotation();
             annotation.coordinate.latitude = Double(i.lat!)!;
             annotation.coordinate.longitude = Double(i.lon!)!;
@@ -234,14 +234,14 @@ extension TravelLocationsMapController {
         mapAnnotations.append(annotation)
         mapView.addAnnotation(annotation);
         
-        let annotationToAdd = Annotation(context: dataContorller.viewContext);
+        let annotationToAdd = Annotation(context: dataController.viewContext);
         annotationToAdd.lat = String(annotation.coordinate.latitude);
         annotationToAdd.lon = String(annotation.coordinate.longitude);
         annotationToAdd.data = [];
         
         
 //        TODO: Catch the error!
-        try? dataContorller.viewContext.save()
+        try? dataController.viewContext.save()
         
 //        let test = TestEntity(context: dataContorller.viewContext)
 //        test.name = "Emad";

@@ -14,9 +14,9 @@ class PhotoAlbumViewController: BaseViewController {
     @IBOutlet weak var mapView: MKMapView!
     
     var annotation = MKPointAnnotation()
-    @IBOutlet weak var newCollectionButton: UIButton!
+    var currentAnnotation: Annotation!;
+//    @IBOutlet weak var newCollectionButton: UIButton!
     @IBOutlet weak var test: UIView!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +25,43 @@ class PhotoAlbumViewController: BaseViewController {
         addAnnotation()
     }
     
+    @IBAction func newCollectionClicked(_ sender: Any) {
+        currentAnnotation = getCurrentAnnotation(dataController: dataController);
+        currentAnnotation.data! = [];
+        //        TODO: Update the CollectionView to be empty.
+        makeFlickrRequest();
+    }
+    func makeFlickrRequest(){
+//        willStartDownloadeData();
+//        FlickrClient.taskForGetRequest(lat: Double(currentAnnotation.lat!)!, lon: Double(currentAnnotation.lon!)!, responseType: SearchResponse.self, page: 1, perPage: 50, completion: self.handelRestResponse(response:error:));
+    }
+    
+//    func handelRestResponse(response: SearchResponse?, error: Error?){
+//        guard response?.photos.photo != [] else {
+//            //            MapData.data = [];
+//            didFinishDownloadeData();
+//            //            TODO: display an alert saying No assosiated photos with the current location found, sorry.
+//            
+//            return
+//        }
+//        for photo in (response?.photos.photo)! {
+//            
+//            FlickrClient.getImage(photo: photo, annotation: currentAnnotation, compleation: self.handelImageResponse(data:error:));
+//            collectionView.reloadData()
+//            
+//        }
+//        
+//        
+//        
+//    }
+//    func handelImageResponse(data: [Data?], error: Error?){
+//        collectionView.reloadData()
+//        //      TODO: Handel the error!!
+//        var data = annotation.data;
+//        try? dataController.viewContext.save();
+//        data = annotation.data;
+//        dataProtocolDelegate?.didFinishDownloadeData();
+//    }
     func addAnnotation(){
         mapView.centerCoordinate = annotation.coordinate;
         mapView.addAnnotation(annotation);
@@ -32,7 +69,7 @@ class PhotoAlbumViewController: BaseViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ToPhotoAlbumCollectionViewController" {
             let photoAlbumCollectionViewController = segue.destination as! PhotoAlbumCollectionViewController;
-            photoAlbumCollectionViewController.dataProtocolDelegate = self;
+//            photoAlbumCollectionViewController.dataProtocolDelegate = self;
         }
     }
 
@@ -67,14 +104,14 @@ extension PhotoAlbumViewController: MKMapViewDelegate {
     }
 }
 
-extension PhotoAlbumViewController: DataProtocol {
-    func willStartDownloadeData() {
-        newCollectionButton.isEnabled = false;
-    }
-    
-    func didFinishDownloadeData() {
-        newCollectionButton.isEnabled = true;
-    }
-    
-    
-}
+//extension PhotoAlbumViewController: DataProtocol {
+//    func willStartDownloadeData() {
+//        newCollectionButton.isEnabled = false;
+//    }
+//
+//    func didFinishDownloadeData() {
+//        newCollectionButton.isEnabled = true;
+//    }
+//
+//
+//}
