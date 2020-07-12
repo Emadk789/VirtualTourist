@@ -18,10 +18,11 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
     var dataContorller: DataContorller = DataContorller.shared;
     
     var annotation: Annotation!;
+//    var annotations: [Annotation]!;
     
     override func viewDidLoad() {
         super.viewDidLoad();
-        makeFetchRequest();
+        getCurrentAnnotation();
         configurCollectionView();
         
     }
@@ -34,10 +35,15 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
         dataProtocolDelegate?.willStartDownloadeData();
 //      TODO: Make the FlickrRequest if the data of the annotation is empty.
 //              Otherwise display the data.
-        
-        if let data = annotation.data {
+        let data = annotation.data!;
+        if data != [] {
+            collectionView.reloadData();
+            dataProtocolDelegate?.didFinishDownloadeData();
             return;
         }
+//        if let data = annotation.data {
+//            return;
+//        }
 //        TODO: Double check how are you storing the images Data.
 //        TODO: Also, reloade the correct data when calling viewWillApper(_:);
         
@@ -48,8 +54,9 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
     
     func handelRestResponse(response: SearchResponse?, error: Error?){
         guard response?.photos.photo != [] else {
-            MapData.data = [];
-            
+//            MapData.data = [];
+            dataProtocolDelegate?.didFinishDownloadeData();
+//            TODO: display an alert saying No assosiated photos with the current location found, sorry.
             
             return
         }
@@ -59,15 +66,20 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
             collectionView.reloadData()
             
         }
+
         
         
     }
     func handelImageResponse(data: [Data?], error: Error?){
         collectionView.reloadData()
+//      TODO: Handel the error!!
+        var data = annotation.data;
+        try? dataContorller.viewContext.save();
+        data = annotation.data;
         dataProtocolDelegate?.didFinishDownloadeData();
     }
     
-    func makeFetchRequest(){
+    func getCurrentAnnotation(){
 //        BaseViewController.Coordinate.lat;
         let fetchRequest: NSFetchRequest<Annotation> = Annotation.fetchRequest();
         let lat = BaseViewController.Coordinate.lat.value;
@@ -91,7 +103,7 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
     // MARK:- UICollectionViewDataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        return MapData.data.count;
-        return annotation.data?.count ?? 0;
+        return annotation.data!.count;
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -109,6 +121,33 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
         cell.imageView.image = image
         return cell;
     }
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        getAnnotations();
+        let selection = annotation.data![indexPath.row];
+        var x = annotation.data!.count;
+        annotation.data!.remove(at: indexPath.row);
+        x = annotation.data!.count;
+        try? dataContorller.viewContext.save();
+    }
+    
+    //    MARK:- Helper
+//    func getAnnotations(){
+//        let fetchRequest: NSFetchRequest<Annotation> = Annotation.fetchRequest();
+////        let lat = BaseViewController.Coordinate.lat.value;
+////        let lon = BaseViewController.Coordinate.lon.value;
+////        let predicateLat: NSPredicate = NSPredicate(format: "lat == %@", String(lat));
+////        let predicateLon: NSPredicate = NSPredicate(format: "lon == %@", String(lon));
+////        let compoundPredicate = NSCompoundPredicate(type: .and, subpredicates: [predicateLat, predicateLon])
+////        fetchRequest.predicate = compoundPredicate;
+//        //        let predicate: NSPredicate = NSPredicate(format: "lat", arguments:  BaseViewController.Coordinate.lat);
+//        
+//        do {
+//            let searchResults = try dataContorller.viewContext.fetch(fetchRequest);
+//            self.annotations = searchResults;
+//        } catch {
+//            print(fatalError());
+//        }
+//    }
     
 }
 

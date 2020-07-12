@@ -31,8 +31,8 @@ class TravelLocationsMapController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-        navigationController?.navigationBar.isHidden = true;
-        gestureConfigurations();
+        
+
         
         
 //        let pin = Pin(context: dataContorller.viewContext);
@@ -76,22 +76,22 @@ class TravelLocationsMapController: BaseViewController {
 //        }
         dataContorller.fetchAnnotations();
         
-        let fetchRequest1: NSFetchRequest<Pin> = Pin.fetchRequest();
-        let fetchRequest2: NSFetchRequest<Pins> = Pins.fetchRequest();
+//        let fetchRequest1: NSFetchRequest<Pin> = Pin.fetchRequest();
+//        let fetchRequest2: NSFetchRequest<Pins> = Pins.fetchRequest();
 //        let predicate: NSPredicate =  NSPredicate(format: "pin == %@", pins);
 //        fetchRequest1.predicate = predicate;
 //        let predicate: NSPredicate =  NSPredicate(format: "name == %@", "AnnotationTest");
 //        fetchRequest.predicate = predicate;
         
 
-        do {
-            let searchResults = try dataContorller.viewContext.fetch(fetchRequest2);
-            let number = searchResults.count;
-            for myPin in searchResults {
-                print(myPin.pins);
-//                print(myPin.lon!);
-                
-            }
+//        do {
+//            let searchResults = try dataContorller.viewContext.fetch(fetchRequest2);
+//            let number = searchResults.count;
+//            for myPin in searchResults {
+//                print(myPin.pins);
+////                print(myPin.lon!);
+//
+//            }
 //            let name = searchResults ;
 //            for n in name {
 ////                print(n.name!);
@@ -100,17 +100,25 @@ class TravelLocationsMapController: BaseViewController {
 //
 //                print(annotation.coordinate);
 //            }
-            print(number);
-        } catch {
-
-            print(error);
-        }
+//            print(number);
+//        } catch {
+//
+//            print(error);
+//        }
         
         
         updateAnnotations();
 //        FlickrClient.taskForGetRequest(lat: 24.774265, lon: 46.738586) { (bool, error) in
 //            
 //        }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated);
+//        navigationController?.navigationBar.isHidden = true;
+//        navigationController?.topViewController
+        navigationController?.setNavigationBarHidden(true, animated: true);
+        
+        gestureConfigurations();
     }
     func updateAnnotations(){
         for i in dataContorller.annotations {
@@ -173,6 +181,9 @@ extension TravelLocationsMapController: MKMapViewDelegate {
         
         
     }
+//    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+//
+//    }
 }
 // MARK:- Get Annotation Flickr Images.
 extension TravelLocationsMapController {
@@ -211,7 +222,7 @@ extension TravelLocationsMapController {
         let annotationToAdd = Annotation(context: dataContorller.viewContext);
         annotationToAdd.lat = String(annotation.coordinate.latitude);
         annotationToAdd.lon = String(annotation.coordinate.longitude);
-        
+        annotationToAdd.data = [];
         
         
 //        TODO: Catch the error!

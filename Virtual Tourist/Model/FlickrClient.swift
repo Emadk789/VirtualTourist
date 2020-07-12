@@ -81,10 +81,10 @@ class FlickrClient: BaseViewController {
 //            dataContorller.Annotation.data.append(data);
 //            dataContorller.annotations.
 //            BaseViewController.Coordinate.
-            annotation.data?.append(data!);
+            annotation.data!.append(data!);
+            let coreData = annotation.data!;
             
-//            TODO: Handel the error!!
-            try? dataContorller.viewContext.save()
+
             DispatchQueue.main.async {
                 compleation(MapData.data, nil);
             }

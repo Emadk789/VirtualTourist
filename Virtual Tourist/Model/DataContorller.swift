@@ -14,7 +14,7 @@ class DataContorller {
     
     let persistentContainer: NSPersistentContainer;
     
-    static let shared = DataContorller(modelName: "Virtual_Tourist");
+    static let shared = DataContorller(modelName: "VirtualTourist");
     var annotations = [Annotation]();
     
     var viewContext: NSManagedObjectContext {
