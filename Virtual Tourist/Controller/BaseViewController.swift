@@ -44,26 +44,26 @@ class BaseViewController: UIViewController {
 
 extension UIViewController {
     
-    func getCurrentAnnotation(dataController: DataContorller) -> Annotation{
-    //        BaseViewController.Coordinate.lat;
-            let fetchRequest: NSFetchRequest<Annotation> = Annotation.fetchRequest();
-            let lat = BaseViewController.Coordinate.lat.value;
-            let lon = BaseViewController.Coordinate.lon.value;
-            let predicateLat: NSPredicate = NSPredicate(format: "lat == %@", String(lat));
-            let predicateLon: NSPredicate = NSPredicate(format: "lon == %@", String(lon));
-            let compoundPredicate = NSCompoundPredicate(type: .and, subpredicates: [predicateLat, predicateLon])
-            fetchRequest.predicate = compoundPredicate;
-    //        let predicate: NSPredicate = NSPredicate(format: "lat", arguments:  BaseViewController.Coordinate.lat);
-            
-            do {
-                let searchResults = try dataController.viewContext.fetch(fetchRequest);
-                
-                let currentAnnotation = searchResults[0];
-                return currentAnnotation;
-            } catch {
-                print(fatalError());
-            }
-        }
+//    func getCurrentAnnotation(dataController: DataContorller) -> Annotation{
+//    //        BaseViewController.Coordinate.lat;
+//            let fetchRequest: NSFetchRequest<Annotation> = Annotation.fetchRequest();
+//            let lat = BaseViewController.Coordinate.lat.value;
+//            let lon = BaseViewController.Coordinate.lon.value;
+//            let predicateLat: NSPredicate = NSPredicate(format: "lat == %@", String(lat));
+//            let predicateLon: NSPredicate = NSPredicate(format: "lon == %@", String(lon));
+//            let compoundPredicate = NSCompoundPredicate(type: .and, subpredicates: [predicateLat, predicateLon])
+//            fetchRequest.predicate = compoundPredicate;
+//    //        let predicate: NSPredicate = NSPredicate(format: "lat", arguments:  BaseViewController.Coordinate.lat);
+//            
+//            do {
+//                let searchResults = try dataController.viewContext.fetch(fetchRequest);
+//                
+//                let currentAnnotation = searchResults[0];
+//                return currentAnnotation;
+//            } catch {
+//                print(fatalError());
+//            }
+//        }
 
     
     

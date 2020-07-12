@@ -28,11 +28,11 @@ class PhotoAlbumViewController: BaseViewController {
         addAnnotation()
     }
     
-    @IBAction func newCollectionClicked(_ sender: Any) {
-        currentAnnotation = getCurrentAnnotation(dataController: dataController);
-        currentAnnotation.data! = [];
-        //        TODO: Update the CollectionView to be empty.
-    }
+//    @IBAction func newCollectionClicked(_ sender: Any) {
+//        currentAnnotation = getCurrentAnnotation(dataController: dataController);
+//        currentAnnotation.data! = [];
+//        //        TODO: Update the CollectionView to be empty.
+//    }
     
 //    func handelRestResponse(response: SearchResponse?, error: Error?){
 //        guard response?.photos.photo != [] else {

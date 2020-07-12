@@ -29,9 +29,9 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad();
-        annotation = getCurrentAnnotation(dataController: dataController);
+//        annotation = getCurrentAnnotation(dataController: dataController);
         pin = dataController.getCurrentPin(dataController: dataController);
-        dataController.fetchPhotos(pin: pin);
+        photos = dataController.fetchPhotos(pin: pin);
         configurCollectionView();
         
         
@@ -55,25 +55,28 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
     }
 //    estimatedHeightforI
     func makeFlickrRequest(){
-        isDownloadingData(false);
-        FlickrClient.taskForGetRequest(lat: Double(annotation.lat!)!, lon: Double(annotation.lon!)!, responseType: SearchResponse.self, page: 1, perPage: 50, completion: self.handelRestResponse(response:error:));
+//        isNotDownloadingData(false);
+        FlickrClient.taskForGetRequest(lat: Double(pin.lat!)!, lon: Double(pin.lon!)!, responseType: SearchResponse.self, page: 1, perPage: 50, completion: self.handelRestResponse(response:error:));
     }
     func configurCollectionView(){
-        isDownloadingData(false);
+        isNotDownloadingData(false);
 //        dataProtocolDelegate?.willStartDownloadeData();
 //      TODO: Make the FlickrRequest if the data of the annotation is empty.
 //              Otherwise display the data.
         
-        let data = annotation.data!;
-        if data != [] {
-            collectionView.reloadData();
-            isDownloadingData(true);
-//            dataProtocolDelegate?.didFinishDownloadeData();
-            return;
-        }
+//        First Increment
+//        let data = annotation.data!;
+//        if data != [] {
+//            collectionView.reloadData();
+//            isNotDownloadingData(true);
+////            dataProtocolDelegate?.didFinishDownloadeData();
+//            return;
+//        }
         
         let data2 = photos;
         if data2 != [] {
+            collectionView.reloadData();
+            isNotDownloadingData(true);
             return;
         }
 //        TODO: Make the photo NSMangedObject in the request.
@@ -92,7 +95,7 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
     func handelRestResponse(response: SearchResponse?, error: Error?){
         guard response?.photos.photo != [] else {
 //            MapData.data = [];
-            isDownloadingData(true);
+            isNotDownloadingData(true);
 //            dataProtocolDelegate?.didFinishDownloadeData();
 //            TODO: display an alert saying No assosiated photos with the current location found, sorry.
             
@@ -100,11 +103,11 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
         }
         for photo in (response?.photos.photo)! {
             let myPhoto = Photo(context: dataController.viewContext);
-            myPhoto.data = [];
+//            myPhoto.data = [];
             pin.addToPhotos(myPhoto);
             
-            FlickrClient.getImage(photo: photo, annotation: annotation, myPhoto: myPhoto, compleation: self.handelImageResponse(data:error:));
-            collectionView.reloadData();
+            FlickrClient.getImage(photo: photo, myPhoto: myPhoto, compleation: self.handelImageResponse(data:error:));
+//            collectionView.reloadData();
             
         }
 
@@ -113,14 +116,26 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
     }
     func handelImageResponse(data: [Data?], error: Error?){
         
-        collectionView.reloadData();
-        reload(collectionView: collectionView);
+//        collectionView.reloadData();
+//        reload(collectionView: collectionView);
 //      TODO: Handel the error!!
-        var data = annotation.data;
+        
+//        First Increment
+//        var data = annotation.data;
+//
+//        try? dataController.viewContext.save();
+//        data = annotation.data;
+//        isNotDownloadingData(true);
+        var myPin = pin.photos;
+        photos = dataController.fetchPhotos(pin: pin);
+        var data = photos[0].data;
         
         try? dataController.viewContext.save();
-        data = annotation.data;
-        isDownloadingData(true);
+        data = photos[0].data;
+        isNotDownloadingData(true);
+        photos = dataController.fetchPhotos(pin: pin);
+        collectionView.reloadData();
+        
 //        dataProtocolDelegate?.didFinishDownloadeData();
     }
     
@@ -144,7 +159,7 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
 //        }
 //    }
 //    MARK: Helper
-    func isDownloadingData(_ value: Bool){
+    func isNotDownloadingData(_ value: Bool){
         newCollectionButton.isEnabled = value;
     }
     
@@ -152,7 +167,12 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
     // MARK:- UICollectionViewDataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        return MapData.data.count;
-        return annotation.data!.count;
+//        First Increment
+//        return annotation.data!.count;
+        pin = dataController.getCurrentPin(dataController: dataController);
+        photos = dataController.fetchPhotos(pin: pin);
+        var number = photos.count;
+        return number;
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -163,9 +183,18 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
 //        let image = UIImage(data: data);
 //        cell.imageView.image = image
 //        return cell;
-        guard let data = annotation.data?[indexPath.row] else {
+        
+        //        First Increment
+//        guard let data = annotation.data?[indexPath.row] else {
+//            return cell
+//        }
+//        let image = UIImage(data: data);
+//        cell.imageView.image = image
+//        return cell;
+        guard let data = photos[indexPath.row].data else {
             return cell
         }
+//        let data = photos[indexPath.row].data!;
         let image = UIImage(data: data);
         cell.imageView.image = image
         return cell;

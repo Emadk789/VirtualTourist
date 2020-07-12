@@ -5,7 +5,18 @@
         <attribute name="lat" optional="YES" attributeType="String"/>
         <attribute name="lon" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="Photo" representedClassName="Photo" syncable="YES">
+        <attribute name="data" optional="YES" attributeType="Binary" storedInTruthFile="YES"/>
+        <relationship name="pin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pin" inverseName="photos" inverseEntity="Pin"/>
+    </entity>
+    <entity name="Pin" representedClassName="Pin" syncable="YES">
+        <attribute name="lat" optional="YES" attributeType="String"/>
+        <attribute name="lon" optional="YES" attributeType="String"/>
+        <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="pin" inverseEntity="Photo"/>
+    </entity>
     <elements>
         <element name="Annotation" positionX="-45" positionY="0" width="128" height="88"/>
+        <element name="Pin" positionX="-191.94921875" positionY="205.87890625" width="128" height="88"/>
+        <element name="Photo" positionX="19.375" positionY="220.796875" width="128" height="73"/>
     </elements>
 </model>

@@ -84,14 +84,14 @@ class DataContorller {
         }
     }
     
-    func fetchPhotos(pin: Pin){
+    func fetchPhotos(pin: Pin)-> [Photo]{
         let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest();
         let predicate = NSPredicate(format: "pin == %@", pin)
         fetchRequest.predicate = predicate
         do {
             let searchResults = try viewContext.fetch(fetchRequest);
             
-            photos = searchResults;
+            return searchResults;
         } catch {
             print(fatalError());
         }

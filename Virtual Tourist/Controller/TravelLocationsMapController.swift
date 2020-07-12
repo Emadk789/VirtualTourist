@@ -76,6 +76,12 @@ class TravelLocationsMapController: BaseViewController {
 //        }
         dataController.fetchAnnotations();
         
+//        for i in dataController.pins {
+//            dataController.viewContext.delete(i);
+//        }
+//        try? dataController.viewContext.save()
+        
+        
 //        let fetchRequest1: NSFetchRequest<Pin> = Pin.fetchRequest();
 //        let fetchRequest2: NSFetchRequest<Pins> = Pins.fetchRequest();
 //        let predicate: NSPredicate =  NSPredicate(format: "pin == %@", pins);
@@ -114,6 +120,7 @@ class TravelLocationsMapController: BaseViewController {
         super.viewWillAppear(animated);
 //        navigationController?.navigationBar.isHidden = true;
 //        navigationController?.topViewController
+        dataController.fetchPins();
         updateAnnotations();
         navigationController?.setNavigationBarHidden(true, animated: animated);
         
@@ -125,7 +132,20 @@ class TravelLocationsMapController: BaseViewController {
     }
     func updateAnnotations(){
         mapView.removeAnnotations(mapAnnotations);
-        for i in dataController.annotations {
+        
+//        First Increment
+//        for i in dataController.annotations {
+//            let annotation = MKPointAnnotation();
+//            annotation.coordinate.latitude = Double(i.lat!)!;
+//            annotation.coordinate.longitude = Double(i.lon!)!;
+//            mapAnnotations.append(annotation)
+//            mapView.addAnnotation(annotation);
+//        }
+        for i in dataController.pins {
+            
+            guard i.lat != nil, i.lon != nil else {
+                return;
+            }
             let annotation = MKPointAnnotation();
             annotation.coordinate.latitude = Double(i.lat!)!;
             annotation.coordinate.longitude = Double(i.lon!)!;
@@ -237,13 +257,14 @@ extension TravelLocationsMapController {
         let annotation = MKPointAnnotation();
         annotation.coordinate = touchMapCoordinate;
         
-        mapAnnotations.append(annotation)
+        mapAnnotations.append(annotation);
         mapView.addAnnotation(annotation);
         
-        let annotationToAdd = Annotation(context: dataController.viewContext);
-        annotationToAdd.lat = String(annotation.coordinate.latitude);
-        annotationToAdd.lon = String(annotation.coordinate.longitude);
-        annotationToAdd.data = [];
+//        First Increment
+//        let annotationToAdd = Annotation(context: dataController.viewContext);
+//        annotationToAdd.lat = String(annotation.coordinate.latitude);
+//        annotationToAdd.lon = String(annotation.coordinate.longitude);
+//        annotationToAdd.data = [];
         
         
 
@@ -260,7 +281,7 @@ extension TravelLocationsMapController {
         
         
         //        TODO: Catch the error!
-        try? dataController.viewContext.save()
+        try? dataController.viewContext.save();
 //        let test = TestEntity(context: dataContorller.viewContext)
 //        test.name = "Emad";
 //        test.age = "22";
