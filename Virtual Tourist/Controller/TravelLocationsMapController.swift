@@ -22,11 +22,53 @@ class TravelLocationsMapController: BaseViewController {
     var annotationView: MKAnnotationView! = nil;
     
     
-    
+    var pinFetchedResultsController: NSFetchedResultsController<Pin>!;
 //    let pin: Pin = NSEntityDescription.insertNewObject(forEntityName: "Pin", into: DataContorller.getContext()) as! Pin
 //    let pins: Pins = NSEntityDescription.insertNewObject(forEntityName: "Pins", into: DataContorller.getContext()) as! Pins
     
 
+    func setupPinFetchedResultsController() {
+
+        let fetchRequest: NSFetchRequest<Pin> = Pin.fetchRequest()
+        let lat = BaseViewController.Coordinate.lat.value;
+        let lon = BaseViewController.Coordinate.lon.value;
+        let predicateLat: NSPredicate = NSPredicate(format: "lat == %@", String(lat));
+        let predicateLon: NSPredicate = NSPredicate(format: "lon == %@", String(lon));
+        let compoundPredicate = NSCompoundPredicate(type: .and, subpredicates: [predicateLat, predicateLon])
+        fetchRequest.predicate = compoundPredicate;
+        let sortDescriptor = NSSortDescriptor(key: "lat", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+
+        pinFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: nil);
+        pinFetchedResultsController.delegate = self;
+
+        do {
+            try pinFetchedResultsController.performFetch();
+        } catch {
+            fatalError("The fetch could not be performed: \(error.localizedDescription)")
+        }
+    }
+    func setupPinsFetchedResultsController() {
+
+        let fetchRequest: NSFetchRequest<Pin> = Pin.fetchRequest()
+//        let lat = BaseViewController.Coordinate.lat.value;
+//        let lon = BaseViewController.Coordinate.lon.value;
+//        let predicateLat: NSPredicate = NSPredicate(format: "lat == %@", String(lat));
+//        let predicateLon: NSPredicate = NSPredicate(format: "lon == %@", String(lon));
+//        let compoundPredicate = NSCompoundPredicate(type: .and, subpredicates: [predicateLat, predicateLon])
+//        fetchRequest.predicate = compoundPredicate;
+        let sortDescriptor = NSSortDescriptor(key: "lat", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+
+        pinFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: nil);
+        pinFetchedResultsController.delegate = self;
+
+        do {
+            try pinFetchedResultsController.performFetch();
+        } catch {
+            fatalError("The fetch could not be performed: \(error.localizedDescription)")
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,7 +116,7 @@ class TravelLocationsMapController: BaseViewController {
 //        } catch {
 //            print(fatalError());
 //        }
-        dataController.fetchAnnotations();
+//        dataController.fetchAnnotations();
         
 //        for i in dataController.pins {
 //            dataController.viewContext.delete(i);
@@ -120,7 +162,9 @@ class TravelLocationsMapController: BaseViewController {
         super.viewWillAppear(animated);
 //        navigationController?.navigationBar.isHidden = true;
 //        navigationController?.topViewController
-        dataController.fetchPins();
+//        dataController.fetchPins();
+        setupPinsFetchedResultsController();
+        
         updateAnnotations();
         navigationController?.setNavigationBarHidden(true, animated: animated);
         
@@ -141,7 +185,7 @@ class TravelLocationsMapController: BaseViewController {
 //            mapAnnotations.append(annotation)
 //            mapView.addAnnotation(annotation);
 //        }
-        for i in dataController.pins {
+        for i in pinFetchedResultsController.fetchedObjects! {
             
             guard i.lat != nil, i.lon != nil else {
                 return;
@@ -195,6 +239,7 @@ extension TravelLocationsMapController: MKMapViewDelegate {
         
         BaseViewController.setCurrentAnnotation(lat: lat, lon: lon);
 //        dataController.fetchPins();
+//        view.annotation.
         
         
         let photoAlbumViewController = storyboard!.instantiateViewController(withIdentifier: "PhotoAlbumViewController") as! PhotoAlbumViewController;
@@ -203,7 +248,10 @@ extension TravelLocationsMapController: MKMapViewDelegate {
         let x = view.annotation as! MKPointAnnotation;
 //        MapData.annotation = view.annotation as! MKPointAnnotation;
         photoAlbumViewController.annotation = view.annotation as! MKPointAnnotation;
-        
+        setupPinFetchedResultsController()
+//        let count = pinFetchedResultsController.fetchedObjects!;
+        photoAlbumViewController.pin = pinFetchedResultsController.fetchedObjects![0];
+//        pinFetchedResultsController.fetchedObjects![0];
         
 //        dataController.pins[]
         
@@ -293,4 +341,57 @@ extension TravelLocationsMapController {
 //        DataContorller.saveContext();
 
     }
+}
+
+extension TravelLocationsMapController: NSFetchedResultsControllerDelegate {
+//    TODO:- Make an extenstion linke this in every class you use the Pin NSObjectclass
+//    TODO: Also, check the Udacity course for why they use it.
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+//        switch type {
+//        case .insert:
+//            let test = String(describing: anObject.self as? Pin);
+//            print(test)
+//            if let indexPath = newIndexPath {
+//            collectionView.insertItems(at: [newIndexPath!])
+//            }
+//            break
+//        case .delete:
+//            collectionView.deleteItems(at: [indexPath!])
+//            break
+//        case .update:
+////            let test = NSStringFromClass(AnyObject.class);
+//////                String(describing: anObject.self as? Pin);
+////            let test2 = AnyObject.self as? Pin;
+////            print(test);
+////            print( test2 == pin)
+//            if let indexPath = indexPath {
+//            collectionView.reloadItems(at: [indexPath])
+//            }
+//        case .move:
+//            collectionView.moveItem(at: indexPath!, to: newIndexPath!)
+//        @unknown default:
+//            fatalError();
+//
+//        }
+//    }
+//
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+//        let indexSet = IndexSet(integer: sectionIndex)
+//        switch type {
+//        case .insert: collectionView.insertSections(indexSet)
+//        case .delete: collectionView.deleteSections(indexSet)
+//        case .update, .move:
+//            fatalError("Invalid change type in controller(_:didChange:atSectionIndex:for:). Only .insert or .delete should be possible.")
+//        }
+//    }
+
+    
+//    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+//        collectionView.beginup
+//    }
+//
+//    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+//        tableView.endUpdates()
+//    }
+    
 }

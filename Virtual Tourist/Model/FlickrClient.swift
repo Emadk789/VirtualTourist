@@ -71,7 +71,7 @@ class FlickrClient: BaseViewController {
     }
     
 //  MARK: getImage
-    static func getImage(photo: PhotoContent, myPhoto: Photo, compleation: @escaping([Data?], Error?)->Void) {
+    static func getImage(photo: PhotoContent, compleation: @escaping(Data?, Error?)->Void) {
         let url = EndPoints.requestImage(photo).url;
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -93,12 +93,12 @@ class FlickrClient: BaseViewController {
             guard let data = data else {
                 return
             }
-            myPhoto.data = data;
-            let testCoreData = myPhoto.data;
+//            myPhoto.data = data;
+//            let testCoreData = myPhoto.data;
 //            try? dataContorller.viewContext.save()
 
             DispatchQueue.main.async {
-                compleation(MapData.data, nil);
+                compleation(data, nil);
             }
         }
         task.resume();

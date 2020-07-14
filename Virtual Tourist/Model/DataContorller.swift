@@ -15,10 +15,11 @@ class DataContorller {
     let persistentContainer: NSPersistentContainer;
     
     static let shared = DataContorller(modelName: "VirtualTourist");
-    var annotations = [Annotation]();
+//    var annotations = [Annotation]();
     
     var pins = [Pin]();
     var photos = [Photo]();
+    
     
     var viewContext: NSManagedObjectContext {
         return persistentContainer.viewContext;
@@ -41,7 +42,7 @@ class DataContorller {
             guard error == nil else {
                 fatalError(error!.localizedDescription)
             }
-            self.autoSaveViewContext()
+            self.autoSaveViewContext(interval: 130)
             self.configureContexts()
             completion?()
         }
@@ -62,16 +63,18 @@ class DataContorller {
                self.autoSaveViewContext(interval: interval)
            }
        }
-    func fetchAnnotations(){
-        let fetchRequest: NSFetchRequest<Annotation> = Annotation.fetchRequest();
-        
-        do {
-            let searchResults = try viewContext.fetch(fetchRequest);
-            annotations = searchResults;
-        } catch {
-            print(fatalError());
-        }
-    }
+//    func fetchAnnotations(){
+//        let fetchRequest: NSFetchRequest<Annotation> = Annotation.fetchRequest();
+//        
+//        do {
+//            let searchResults = try viewContext.fetch(fetchRequest);
+//            annotations = searchResults;
+//        } catch {
+//            print(fatalError());
+//        }
+//    }
+    
+    
     
     func fetchPins(){
         let fetchRequest: NSFetchRequest<Pin> = Pin.fetchRequest();

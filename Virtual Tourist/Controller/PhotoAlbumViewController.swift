@@ -8,25 +8,28 @@
 
 import UIKit
 import MapKit;
+import CoreData;
 
 class PhotoAlbumViewController: BaseViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     
     var annotation = MKPointAnnotation()
-    var currentAnnotation: Annotation!;
+//    var currentAnnotation: Annotation!;
 //    @IBOutlet weak var newCollectionButton: UIButton!
     @IBOutlet weak var test: UIView!
     
     
     var pin: Pin!;
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-
+//        let myPin = pin;
         addAnnotation()
     }
+    
     
 //    @IBAction func newCollectionClicked(_ sender: Any) {
 //        currentAnnotation = getCurrentAnnotation(dataController: dataController);
@@ -67,6 +70,8 @@ class PhotoAlbumViewController: BaseViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ToPhotoAlbumCollectionViewController" {
             let photoAlbumCollectionViewController = segue.destination as! PhotoAlbumCollectionViewController;
+            photoAlbumCollectionViewController.pin = pin;
+            
 //            dataController.fetchPins();
 //            photoAlbumCollectionViewController.pin = pin;
 //            photoAlbumCollectionViewController.dataProtocolDelegate = self;
@@ -102,6 +107,44 @@ extension PhotoAlbumViewController: MKMapViewDelegate {
             }
         }
     }
+}
+
+extension PhotoAlbumViewController: NSFetchedResultsControllerDelegate {
+    
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+//        switch type {
+//        case .insert:
+//            collectionView.insertItems(at: [newIndexPath!])
+//            break
+//        case .delete:
+//            collectionView.deleteItems(at: [indexPath!])
+//            break
+//        case .update:
+//            collectionView.reloadItems(at: [indexPath!])
+//        case .move:
+//            collectionView.moveItem(at: indexPath!, to: newIndexPath!)
+//        }
+//    }
+//
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+//        let indexSet = IndexSet(integer: sectionIndex)
+//        switch type {
+//        case .insert: collectionView.insertSections(indexSet)
+//        case .delete: collectionView.deleteSections(indexSet)
+//        case .update, .move:
+//            fatalError("Invalid change type in controller(_:didChange:atSectionIndex:for:). Only .insert or .delete should be possible.")
+//        }
+//    }
+
+    
+//    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+//        collectionView.beginup
+//    }
+//
+//    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+//        tableView.endUpdates()
+//    }
+    
 }
 
 //extension PhotoAlbumViewController: DataProtocol {

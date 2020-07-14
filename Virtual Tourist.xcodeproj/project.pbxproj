@@ -28,8 +28,6 @@
 		697A72EB24B93C36007B169C /* Extra + UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697A72EA24B93C36007B169C /* Extra + UIViewController.swift */; };
 		697A72ED24B93C84007B169C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697A72EC24B93C84007B169C /* BaseViewController.swift */; };
 		697A733F24BA5CF1007B169C /* VirtualTourist.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 697A733D24BA5CF1007B169C /* VirtualTourist.xcdatamodeld */; };
-		697A734224BA5DB8007B169C /* Annotation+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697A734024BA5DB8007B169C /* Annotation+CoreDataClass.swift */; };
-		697A734324BA5DB8007B169C /* Annotation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697A734124BA5DB8007B169C /* Annotation+CoreDataProperties.swift */; };
 		697DF51F24B0E2D500CAFC89 /* Pin + Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697DF51E24B0E2D500CAFC89 /* Pin + Extra.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,8 +55,6 @@
 		697A72EA24B93C36007B169C /* Extra + UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extra + UIViewController.swift"; sourceTree = "<group>"; };
 		697A72EC24B93C84007B169C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		697A733E24BA5CF1007B169C /* VirtualTourist.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VirtualTourist.xcdatamodel; sourceTree = "<group>"; };
-		697A734024BA5DB8007B169C /* Annotation+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Annotation+CoreDataClass.swift"; sourceTree = "<group>"; };
-		697A734124BA5DB8007B169C /* Annotation+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Annotation+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		697DF51E24B0E2D500CAFC89 /* Pin + Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pin + Extra.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -159,8 +155,6 @@
 				6943549A24BB7DCB005C51FC /* Photo+CoreDataProperties.swift */,
 				6943549B24BB7DCB005C51FC /* Pin+CoreDataClass.swift */,
 				6943549C24BB7DCB005C51FC /* Pin+CoreDataProperties.swift */,
-				697A734024BA5DB8007B169C /* Annotation+CoreDataClass.swift */,
-				697A734124BA5DB8007B169C /* Annotation+CoreDataProperties.swift */,
 				695D979124AFC4250077AC06 /* MapData.swift */,
 				695D979524B019DA0077AC06 /* DataContorller.swift */,
 				697DF51E24B0E2D500CAFC89 /* Pin + Extra.swift */,
@@ -252,10 +246,8 @@
 				697A72EB24B93C36007B169C /* Extra + UIViewController.swift in Sources */,
 				694354A024BB7DCB005C51FC /* Pin+CoreDataProperties.swift in Sources */,
 				695D979424AFD8690077AC06 /* DataProtocol.swift in Sources */,
-				697A734224BA5DB8007B169C /* Annotation+CoreDataClass.swift in Sources */,
 				697DF51F24B0E2D500CAFC89 /* Pin + Extra.swift in Sources */,
 				695D978F24AF417E0077AC06 /* SearchResonse.swift in Sources */,
-				697A734324BA5DB8007B169C /* Annotation+CoreDataProperties.swift in Sources */,
 				695D978124ACA0B50077AC06 /* PhotoAlbumViewController.swift in Sources */,
 				695D976B24AB8C550077AC06 /* SceneDelegate.swift in Sources */,
 				695D978324ACBD170077AC06 /* PhotoAlbumCollectionViewController.swift in Sources */,

@@ -2,7 +2,7 @@
 //  Photo+CoreDataProperties.swift
 //  Virtual Tourist
 //
-//  Created by Emad Albarnawi on 12/07/2020.
+//  Created by Emad Albarnawi on 13/07/2020.
 //  Copyright © 2020 Emad Albarnawi. All rights reserved.
 //
 //
@@ -18,6 +18,8 @@ extension Photo {
     }
 
     @NSManaged public var data: Data?
+    @NSManaged public var lat: String?
+    @NSManaged public var lon: String?
     @NSManaged public var pin: Pin?
 
 }
