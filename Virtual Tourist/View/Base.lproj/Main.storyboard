@@ -149,8 +149,8 @@
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
-                                    <outlet property="dataSource" destination="e6b-UH-cN5" id="W2O-Xx-Srh"/>
-                                    <outlet property="delegate" destination="e6b-UH-cN5" id="ET4-lY-MMm"/>
+                                    <outlet property="dataSource" destination="e6b-UH-cN5" id="uPN-c6-7yA"/>
+                                    <outlet property="delegate" destination="e6b-UH-cN5" id="PTf-pd-4Wq"/>
                                 </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="46g-ss-yPF">

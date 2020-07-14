@@ -12,9 +12,9 @@ class PhotoAlbumCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     var what: String = "Emad";
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        imageView.image = nil;
-    }
+//    override func prepareForReuse() {
+//        super.prepareForReuse()
+//        imageView.image = nil;
+//    }
     
 }

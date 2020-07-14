@@ -164,6 +164,13 @@ class TravelLocationsMapController: BaseViewController {
 //        navigationController?.topViewController
 //        dataController.fetchPins();
         setupPinsFetchedResultsController();
+//        mapAnnotations = [];
+//        mapView.removeAnnotations(mapAnnotations);
+//        for i in pinFetchedResultsController.fetchedObjects! {
+//            dataController.viewContext.delete(i);
+//            
+//        }
+//        try? dataController.viewContext.save()
         
         updateAnnotations();
         navigationController?.setNavigationBarHidden(true, animated: animated);

@@ -21,151 +21,65 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
     
     var dataController: DataContorller = DataContorller.shared;
     
-//    var annotation: Annotation!;
-    private var blockOperation = BlockOperation();
     
-    var fetchedResultsController: NSFetchedResultsController<Photo>!;
+//    var fetchedResultsController: NSFetchedResultsController<Photo>!;
 //    var pinFetchedResultsController: NSFetchedResultsController<Pin>!;
     
     
 //    var annotations: [Annotation]!;
     var pin: Pin!;
-//    var photos: [Photo]?;
+    var photos: [Photo]!;
     
-    func setupFetchedResultsController() {
-        
-//        let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest();
-//        let predicate = NSPredicate(format: "pin == %@", pin)
-//        fetchRequest.predicate = predicate
-//        do {
-//            let searchResults = try viewContext.fetch(fetchRequest);
-//
-//            return searchResults;
-//        } catch {
-//            print(fatalError());
-//        }
-        
-        
-//        let fetchRequest:NSFetchRequest<Photo> = Photo.fetchRequest()
-//        let predicate = NSPredicate(format: "pin == %@", pin)
-//        fetchRequest.predicate = predicate
-//        let sortDescriptor = NSSortDescriptor(key: "data", ascending: true)
-//        fetchRequest.sortDescriptors = [sortDescriptor]
-//
-//        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: nil);
-//        fetchedResultsController.delegate = self;
-//
-//        do {
-//            try fetchedResultsController.performFetch()
-//        } catch {
-//            fatalError("The fetch could not be performed: \(error.localizedDescription)")
-//        }
-        let fetchRequest:NSFetchRequest<Photo> = Photo.fetchRequest()
-        let lat = BaseViewController.Coordinate.lat.value;
-        let lon = BaseViewController.Coordinate.lon.value;
-//        let predicateLat: NSPredicate = NSPredicate(format: "lat == %@", String(lat));
-//        let predicateLon: NSPredicate = NSPredicate(format: "lon == %@", String(lon));
-        let predicatePin: NSPredicate = NSPredicate(format: "pin == %@", pin);
-        let compoundPredicate = NSCompoundPredicate(type: .and, subpredicates: [predicatePin]);
-        fetchRequest.predicate = compoundPredicate;
-        let sortDescriptor = NSSortDescriptor(key: "data", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: nil);
-        fetchedResultsController.delegate = self;
-
-        do {
-            try fetchedResultsController.performFetch()
-        } catch {
-            fatalError("The fetch could not be performed: \(error.localizedDescription)")
-        }
-    }
-    
-//    func setupPinFetchedResultsController() {
-//
-//        let fetchRequest: NSFetchRequest<Pin> = Pin.fetchRequest()
-//        let lat = BaseViewController.Coordinate.lat.value;
-//        let lon = BaseViewController.Coordinate.lon.value;
-//        let predicateLat: NSPredicate = NSPredicate(format: "lat == %@", String(lat));
-//        let predicateLon: NSPredicate = NSPredicate(format: "lon == %@", String(lon));
-//        let compoundPredicate = NSCompoundPredicate(type: .and, subpredicates: [predicateLat, predicateLon])
-//        fetchRequest.predicate = compoundPredicate;
-//        let sortDescriptor = NSSortDescriptor(key: "lat", ascending: true)
-//        fetchRequest.sortDescriptors = [sortDescriptor]
-//
-//        pinFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: nil);
-//        pinFetchedResultsController.delegate = self;
-//
-//        do {
-//            try pinFetchedResultsController.performFetch();
-//        } catch {
-//            fatalError("The fetch could not be performed: \(error.localizedDescription)")
-//        }
-//    }
-
+    var numberOfImagesTobeRequested: Int = 0;
+    var photosData: [PhotoContent]!;
     
     override func viewDidLoad() {
         super.viewDidLoad();
-//        annotation = getCurrentAnnotation(dataController: dataController);
-//        pin = dataController.getCurrentPin(dataController: dataController);
+//        setupFetchedResultsController();
+        pin = dataController.getCurrentPin(dataController: dataController);
+        
+//        let testFetch = fetchedResultsController.fetchedObjects;
 //        photos = dataController.fetchPhotos(pin: pin);
-//        setupPinFetchedResultsController();
-        setupFetchedResultsController();
-        let testFetch = fetchedResultsController.fetchedObjects;
-//        let what = testFetch![0].data;
-        configurCollectionView();
+        
         
         
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated);
 //        collectionView.reloadData();
-        setupFetchedResultsController();
-//        if let indexPath = collectionView.indexPathsForSelectedItems {
-////            collectionView.deselectItem(at: indexPath, animated: false);
-//            collectionView.reloadItems(at: indexPath);
-////            tableView.reloadRows(at: [indexPath], with: .fade)
-//        }
+//        setupFetchedResultsController();
+        photos = dataController.fetchPhotos(pin: pin);
+        configurCollectionView();
     }
     
     @IBAction func newCollectionClicked(_ sender: Any) {
 //        annotation.data = [];
         makeFlickrRequest();
     }
-    func reload(collectionView: UICollectionView) {
-
-        let contentOffset = collectionView.contentOffset
-        collectionView.reloadData()
-        collectionView.layoutIfNeeded()
-        collectionView.setContentOffset(contentOffset, animated: false)
-
-    }
+//    func reload(collectionView: UICollectionView) {
+//
+//        let contentOffset = collectionView.contentOffset
+//        collectionView.reloadData()
+//        collectionView.layoutIfNeeded()
+//        collectionView.setContentOffset(contentOffset, animated: false)
+//
+//    }
 //    estimatedHeightforI
     func makeFlickrRequest(){
 //        isNotDownloadingData(false);
         FlickrClient.taskForGetRequest(lat: BaseViewController.Coordinate.lat.value, lon: BaseViewController.Coordinate.lon.value, responseType: SearchResponse.self, page: 1, perPage: 50, completion: self.handelRestResponse(response:error:));
+        
     }
     func configurCollectionView(){
         isNotDownloadingData(false);
 //        dataProtocolDelegate?.willStartDownloadeData();
 //      TODO:- Make the FlickrRequest if the data of the annotation is empty.
-//              Otherwise display the data.
-        
-//        First Increment
-//        let data = annotation.data!;
-//        if data != [] {
-//            collectionView.reloadData();
-//            isNotDownloadingData(true);
-////            dataProtocolDelegate?.didFinishDownloadeData();
-//            return;
-//        }
-        
-        let data = fetchedResultsController.fetchedObjects ?? [];
-//        if data != [] {
-//            //            collectionView.reloadData();
-//            isNotDownloadingData(true);
-//            return;
-//        }
+        let data = photos ?? [];
+        if data != [] {
+            //            collectionView.reloadData();
+            isNotDownloadingData(true);
+            return;
+        }
 //        let data2 = photos ?? [];
 //        if data2 != [] {
 ////            collectionView.reloadData();
@@ -181,7 +95,6 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
 //        TODO: Also, reloade the correct data when calling viewWillApper(_:);
         
         makeFlickrRequest();
-//        FlickrClient.taskForGetRequest(lat: (MapData.annotation.coordinate.latitude), lon: (MapData.annotation.coordinate.longitude), responseType: SearchResponse.self, page: 1, perPage: 50, completion: self.handelRestResponse(response:error:));
         
     }
     
@@ -189,24 +102,33 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
         guard response?.photos.photo != [] else {
 //            MapData.data = [];
             isNotDownloadingData(true);
+            
 //            dataProtocolDelegate?.didFinishDownloadeData();
 //            TODO: display an alert saying No assosiated photos with the current location found, sorry.
             
             return
         }
-        for photo in (response?.photos.photo)! {
-//            let myPhoto = Photo(context: dataController.viewContext);
-////            myPhoto.data = [];
-////            pin.addToPhotos(myPhoto);
-//            myPhoto.pin = pin;
-//            pinFetchedResultsController.fetchedObjects![0].addToPhotos(myPhoto);
-//            myPhoto.pin = pinFetchedResultsController.fetchedObjects![0];
-//            pin.addToPhotos(myPhoto);
-            
-            FlickrClient.getImage(photo: photo, compleation: self.handelImageResponse(data:error:));
-//            collectionView.reloadData();
-            
+        numberOfImagesTobeRequested = (response?.photos.photo)?.count ?? 0;
+        
+        DispatchQueue.main.async {
+            self.photosData = (response?.photos.photo);
+            self.collectionView.reloadData();
+            self.collectionView.reloadData();
+
         }
+//        for photo in (response?.photos.photo)! {
+////            let myPhoto = Photo(context: dataController.viewContext);
+//////            myPhoto.data = [];
+//////            pin.addToPhotos(myPhoto);
+////            myPhoto.pin = pin;
+////            pinFetchedResultsController.fetchedObjects![0].addToPhotos(myPhoto);
+////            myPhoto.pin = pinFetchedResultsController.fetchedObjects![0];
+////            pin.addToPhotos(myPhoto);
+//
+//            FlickrClient.getImage(photo: photo, compleation: self.handelImageResponse(data:error:));
+////            collectionView.reloadData();
+//
+//        }
         
 
         
@@ -223,7 +145,7 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
 //        let testCoreData = myPhoto.data;
         let myPin = pin;
         let testPhotos = (pin.photos)?.allObjects as? [Photo];
-        let testFetch = fetchedResultsController.fetchedObjects;
+//        let testFetch = fetchedResultsController.fetchedObjects;
 //        photos = pin.photos;
 //        try? dataController.viewContext.save();
 //        collectionView.reloadData();
@@ -233,7 +155,7 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
 //        First Increment
 //        var data = annotation.data;
 //
-//        try? dataController.viewContext.save();
+        try? dataController.viewContext.save();
 //        data = annotation.data;
 //        isNotDownloadingData(true);
 //        var myPin = pin.photos;
@@ -243,6 +165,8 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
 ////        try? dataController.viewContext.save();
 //        data = photos?[0].data;
         isNotDownloadingData(true);
+//        photos = dataController.fetchPhotos(pin: pin);
+        collectionView.reloadData();
 //        photos = dataController.fetchPhotos(pin: pin);
 //        collectionView.reloadData();
         
@@ -281,8 +205,22 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
 //        return annotation.data!.count;
 //        pin = dataController.getCurrentPin(dataController: dataController);
 //        photos = dataController.fetchPhotos(pin: pin);
-        let number = fetchedResultsController.sections?[section].numberOfObjects ?? 0;
-        return number;
+//        let number = fetchedResultsController.sections?[section].numberOfObjects ?? 0;
+//        return number;
+//        photos = dataController.fetchPhotos(pin: pin);
+        
+//        if numberOfImagesTobeRequested != 0 {
+//        let number = numberOfImagesTobeRequested;
+//        if number == 0 {
+//            return 10
+//        }
+//        return number;
+//        }
+        photos = dataController.fetchPhotos(pin: pin);
+        let number = photos?.count ?? 0;
+//        if number != 0 { return number }
+        let number2 = numberOfImagesTobeRequested;
+        return number2;
     }
     
     
@@ -290,8 +228,11 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 //        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
 //        collectionView.register(PhotoAlbumCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier);
-        let photo = fetchedResultsController.object(at: indexPath);
+//        let photo = fetchedResultsController.object(at: indexPath);
 //        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PhotoAlbumCollectionViewCell;
+//        photos =?
+//        photos = dataController.fetchPhotos(pin: pin);
+//        let testPhotos = dataController.fetchPhotos(pin: pin);
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? PhotoAlbumCollectionViewCell else {
             
             fatalError("wrong cell! \(indexPath)");
@@ -303,37 +244,66 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
 //        let image = UIImage(data: data);
 //        cell.imageView.image = image
 //        return cell;
+        let row = indexPath.row;
+        let count = dataController.fetchPhotos(pin: pin).count;
+        if dataController.fetchPhotos(pin: pin).count >= indexPath.row && dataController.fetchPhotos(pin: pin).count != 0 {
+                    let myPhoto = dataController.fetchPhotos(pin: pin)[indexPath.row];
+                    //        First Increment
+            //        guard let data = annotation.data?[indexPath.row] else {
+            //            return cell
+            //        }
+            //        let image = UIImage(data: data);
+            //        cell.imageView.image = image
+            //        return cell;
+            //        guard photos != [] else {
+            //            return cell
+            //        }
+                    if let myData = myPhoto.data {
+                    
+                        for photo in photosData {
+                        //            let myPhoto = Photo(context: dataController.viewContext);
+                        ////            myPhoto.data = [];
+                        ////            pin.addToPhotos(myPhoto);
+                        //            myPhoto.pin = pin;
+                        //            pinFetchedResultsController.fetchedObjects![0].addToPhotos(myPhoto);
+                        //            myPhoto.pin = pinFetchedResultsController.fetchedObjects![0];
+                        //            pin.addToPhotos(myPhoto);
+                                    
+            //                        FlickrClient.getImage(photo: photo, compleation: self.handelImageResponse(data:error:));
+                            FlickrClient.getImage(photo: photo) { (data, error) in
+                                guard let data = data else {
+                                    return;
+                                }
+                                cell.imageView.image = UIImage(data: data);
+                            }
+                        //            collectionView.reloadData();
+                                    
+                                }
+                    }
+        }
         
-        //        First Increment
-//        guard let data = annotation.data?[indexPath.row] else {
+        
+//        guard let data = photos?[indexPath.row].data else {
 //            return cell
 //        }
+////        let data = photos[indexPath.row].data!;
 //        let image = UIImage(data: data);
+//
+////        UIImage(data: fetchedResultsController.object(at: indexPath).data)
+//        let wat = cell.what;
 //        cell.imageView.image = image
-//        return cell;
-        guard let data = photo.data else {
-            return cell
-        }
-//        let data = photos[indexPath.row].data!;
-        let image = UIImage(data: data);
-//        UIImage(data: fetchedResultsController.object(at: indexPath).data)
-        let wat = cell.what;
-        cell.imageView.image = image
         return cell;
     }
-//    override func tableView(tableView:UITableView!, heightForRowAtIndexPath indexPath:NSIndexPath)->CGFloat {
-//        return 44
-//    }
 
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        getAnnotations();
-//        let selection = photos?[indexPath.row];
-//        var x = annotation.data!.count;
-//        annotation.data!.remove(at: indexPath.row);
-//        x = annotation.data!.count;
-        try? dataController.viewContext.save();
-//        collectionView.reloadData();
-    }
+//    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+////        getAnnotations();
+////        let selection = photos?[indexPath.row];
+////        var x = annotation.data!.count;
+////        annotation.data!.remove(at: indexPath.row);
+////        x = annotation.data!.count;
+////        try? dataController.viewContext.save();
+////        collectionView.reloadData();
+//    }
     
     //    MARK:- Helper
 //    func getAnnotations(){
@@ -379,137 +349,137 @@ extension PhotoAlbumCollectionViewController: UICollectionViewDelegateFlowLayout
 
 
 
-extension PhotoAlbumCollectionViewController: NSFetchedResultsControllerDelegate {
-//    TODO:- Make an extenstion linke this in every class you use the Pin NSObjectclass
-//    TODO: Also, check the Udacity course for why they use it.
-//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-//        switch type {
-//        case .insert:
-//            let test = String(describing: anObject.self as? Pin);
-//            print(test)
-//            if let indexPath = newIndexPath {
-//            collectionView.insertItems(at: [newIndexPath!])
-//            }
-//            break
-//        case .delete:
-//            collectionView.deleteItems(at: [indexPath!])
-//            break
-//        case .update:
-////            let test = NSStringFromClass(AnyObject.class);
-//////                String(describing: anObject.self as? Pin);
-////            let test2 = AnyObject.self as? Pin;
-////            print(test);
-////            print( test2 == pin)
-//            if let indexPath = indexPath {
-//            collectionView.reloadItems(at: [indexPath])
-//            }
-//        case .move:
-//            collectionView.moveItem(at: indexPath!, to: newIndexPath!)
-//        @unknown default:
-//            fatalError();
+//extension PhotoAlbumCollectionViewController: NSFetchedResultsControllerDelegate {
+////    TODO:- Make an extenstion linke this in every class you use the Pin NSObjectclass
+////    TODO: Also, check the Udacity course for why they use it.
+////    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+////        switch type {
+////        case .insert:
+////            let test = String(describing: anObject.self as? Pin);
+////            print(test)
+////            if let indexPath = newIndexPath {
+////            collectionView.insertItems(at: [newIndexPath!])
+////            }
+////            break
+////        case .delete:
+////            collectionView.deleteItems(at: [indexPath!])
+////            break
+////        case .update:
+//////            let test = NSStringFromClass(AnyObject.class);
+////////                String(describing: anObject.self as? Pin);
+//////            let test2 = AnyObject.self as? Pin;
+//////            print(test);
+//////            print( test2 == pin)
+////            if let indexPath = indexPath {
+////            collectionView.reloadItems(at: [indexPath])
+////            }
+////        case .move:
+////            collectionView.moveItem(at: indexPath!, to: newIndexPath!)
+////        @unknown default:
+////            fatalError();
+////
+////        }
+////    }
+////
+////    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+////        let indexSet = IndexSet(integer: sectionIndex)
+////        switch type {
+////        case .insert: collectionView.insertSections(indexSet)
+////        case .delete: collectionView.deleteSections(indexSet)
+////        case .update, .move:
+////            fatalError("Invalid change type in controller(_:didChange:atSectionIndex:for:). Only .insert or .delete should be possible.")
+////        }
+////    }
+////    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+////        insertedIndexPaths = [IndexPath]()
+////        deletedIndexPaths = [IndexPath]()
+////        updatedIndexPaths = [IndexPath]()
+////    }
+////    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+////        collectionView.performBatchUpdates({() -> Void in
+////
+////            for indexPath in self.insertedIndexPaths {
+////                self.collectionView.insertItems(at: [indexPath])
+////            }
+////
+////            for indexPath in self.deletedIndexPaths {
+////                self.collectionView.deleteItems(at: [indexPath])
+////            }
+////
+////            for indexPath in self.updatedIndexPaths {
+////                self.collectionView.reloadItems(at: [indexPath])
+////            }
+////
+////        }, completion: nil)
+////    }
 //
-//        }
+//    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+//        blockOperation = BlockOperation()
 //    }
 //
 //    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-//        let indexSet = IndexSet(integer: sectionIndex)
+//        let sectionIndexSet = IndexSet(integer: sectionIndex)
+//
 //        switch type {
-//        case .insert: collectionView.insertSections(indexSet)
-//        case .delete: collectionView.deleteSections(indexSet)
-//        case .update, .move:
-//            fatalError("Invalid change type in controller(_:didChange:atSectionIndex:for:). Only .insert or .delete should be possible.")
+//        case .insert:
+//            blockOperation.addExecutionBlock {
+//                self.collectionView?.insertSections(sectionIndexSet)
+//            }
+//        case .delete:
+//            blockOperation.addExecutionBlock {
+//                self.collectionView?.deleteSections(sectionIndexSet)
+//            }
+//        case .update:
+//            blockOperation.addExecutionBlock {
+//                self.collectionView?.reloadSections(sectionIndexSet)
+//            }
+//        case .move:
+//            assertionFailure()
+//            break
 //        }
 //    }
-//    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//        insertedIndexPaths = [IndexPath]()
-//        deletedIndexPaths = [IndexPath]()
-//        updatedIndexPaths = [IndexPath]()
+//
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+//        switch type {
+//        case .insert:
+//            guard let newIndexPath = newIndexPath else { break }
+//
+//            blockOperation.addExecutionBlock {
+//                self.collectionView?.insertItems(at: [newIndexPath])
+//            }
+//        case .delete:
+//            guard let indexPath = indexPath else { break }
+//
+//            blockOperation.addExecutionBlock {
+//                self.collectionView?.deleteItems(at: [indexPath])
+//            }
+//        case .update:
+//            guard let indexPath = indexPath else { break }
+//
+//            blockOperation.addExecutionBlock {
+//                self.collectionView?.reloadItems(at: [indexPath])
+//            }
+//        case .move:
+//            guard let indexPath = indexPath, let newIndexPath = newIndexPath else { return }
+//
+//            blockOperation.addExecutionBlock {
+//                self.collectionView?.moveItem(at: indexPath, to: newIndexPath)
+//            }
+//        }
 //    }
 //    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//        collectionView.performBatchUpdates({() -> Void in
-//
-//            for indexPath in self.insertedIndexPaths {
-//                self.collectionView.insertItems(at: [indexPath])
-//            }
-//
-//            for indexPath in self.deletedIndexPaths {
-//                self.collectionView.deleteItems(at: [indexPath])
-//            }
-//
-//            for indexPath in self.updatedIndexPaths {
-//                self.collectionView.reloadItems(at: [indexPath])
-//            }
-//
-//        }, completion: nil)
+//        collectionView?.performBatchUpdates({
+//            self.blockOperation.start()
+//            }, completion: nil)
 //    }
-
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        blockOperation = BlockOperation()
-    }
-
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-        let sectionIndexSet = IndexSet(integer: sectionIndex)
-
-        switch type {
-        case .insert:
-            blockOperation.addExecutionBlock {
-                self.collectionView?.insertSections(sectionIndexSet)
-            }
-        case .delete:
-            blockOperation.addExecutionBlock {
-                self.collectionView?.deleteSections(sectionIndexSet)
-            }
-        case .update:
-            blockOperation.addExecutionBlock {
-                self.collectionView?.reloadSections(sectionIndexSet)
-            }
-        case .move:
-            assertionFailure()
-            break
-        }
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch type {
-        case .insert:
-            guard let newIndexPath = newIndexPath else { break }
-            
-            blockOperation.addExecutionBlock {
-                self.collectionView?.insertItems(at: [newIndexPath])
-            }
-        case .delete:
-            guard let indexPath = indexPath else { break }
-            
-            blockOperation.addExecutionBlock {
-                self.collectionView?.deleteItems(at: [indexPath])
-            }
-        case .update:
-            guard let indexPath = indexPath else { break }
-            
-            blockOperation.addExecutionBlock {
-                self.collectionView?.reloadItems(at: [indexPath])
-            }
-        case .move:
-            guard let indexPath = indexPath, let newIndexPath = newIndexPath else { return }
-            
-            blockOperation.addExecutionBlock {
-                self.collectionView?.moveItem(at: indexPath, to: newIndexPath)
-            }
-        }
-    }
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        collectionView?.performBatchUpdates({
-            self.blockOperation.start()
-            }, completion: nil)
-    }
-//    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//        collectionView.beginup
-//    }
+////    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+////        collectionView.beginup
+////    }
+////
+////    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+////        tableView.endUpdates()
+////    }
 //
-//    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//        tableView.endUpdates()
-//    }
-    
-}
+//}
 
 
