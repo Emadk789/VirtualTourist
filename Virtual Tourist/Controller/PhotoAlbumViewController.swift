@@ -21,6 +21,8 @@ class PhotoAlbumViewController: BaseViewController {
     
     
     var pin: Pin!;
+    var photosToRequest: Int = 0;
+    var dataToRequest: [PhotoContent] = [];
     
     
     override func viewDidLoad() {
@@ -71,7 +73,8 @@ class PhotoAlbumViewController: BaseViewController {
         if segue.identifier == "ToPhotoAlbumCollectionViewController" {
             let photoAlbumCollectionViewController = segue.destination as! PhotoAlbumCollectionViewController;
             photoAlbumCollectionViewController.pin = pin;
-            
+            photoAlbumCollectionViewController.photosToRequest = photosToRequest;
+            photoAlbumCollectionViewController.dataToRequest = dataToRequest;
 //            dataController.fetchPins();
 //            photoAlbumCollectionViewController.pin = pin;
 //            photoAlbumCollectionViewController.dataProtocolDelegate = self;

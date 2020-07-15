@@ -168,7 +168,7 @@ class TravelLocationsMapController: BaseViewController {
 //        mapView.removeAnnotations(mapAnnotations);
 //        for i in pinFetchedResultsController.fetchedObjects! {
 //            dataController.viewContext.delete(i);
-//            
+//
 //        }
 //        try? dataController.viewContext.save()
         
@@ -257,15 +257,35 @@ extension TravelLocationsMapController: MKMapViewDelegate {
         photoAlbumViewController.annotation = view.annotation as! MKPointAnnotation;
         setupPinFetchedResultsController()
 //        let count = pinFetchedResultsController.fetchedObjects!;
-        photoAlbumViewController.pin = pinFetchedResultsController.fetchedObjects![0];
+        let pin = pinFetchedResultsController.fetchedObjects![0];
+        photoAlbumViewController.pin = pin
 //        pinFetchedResultsController.fetchedObjects![0];
         
 //        dataController.pins[]
+        let potos = dataController.fetchPhotos(pin: pin)
+        if potos.isEmpty {
+            FlickrClient.taskForGetRequest(lat: BaseViewController.Coordinate.lat.value, lon: BaseViewController.Coordinate.lon.value, responseType: SearchResponse.self, page: 1, perPage: 50) { response, error in
+                
+                let data = (response?.photos.photo)!
+                photoAlbumViewController.dataToRequest = data;
+                photoAlbumViewController.photosToRequest = data.count;
+                //                    getDataAndReloadCollectionView(data: data);
+                
+                self.navigationController?.pushViewController(photoAlbumViewController, animated: true);
+            }
+        }
+        else {
+            self.navigationController?.pushViewController(photoAlbumViewController, animated: true);
+        }
         
-        navigationController?.pushViewController(photoAlbumViewController, animated: true);
+        
         
         
     }
+//    func handelRestResponse(response: SearchResponse?, error: Error?) {
+//
+//        navigationController?.pushViewController(photoAlbumViewController, animated: true);
+//    }
 //    func updateMapView(){
 //        let touchPoint = gestureRecognizer.location(in: mapView)
 //                let touchMapCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
