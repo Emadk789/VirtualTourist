@@ -172,7 +172,7 @@
                         <viewLayoutGuide key="safeArea" id="DC8-Nv-yLN"/>
                     </view>
                     <connections>
-                        <outlet property="flowLayout" destination="At6-yp-tQY" id="WU6-MK-CcH"/>
+                        <outlet property="myCollectionView" destination="At6-yp-tQY" id="1WA-2c-Hmd"/>
                         <outlet property="newCollectionButton" destination="46g-ss-yPF" id="cBB-d8-YCJ"/>
                     </connections>
                 </viewController>

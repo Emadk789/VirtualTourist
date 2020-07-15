@@ -21,9 +21,11 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
     
     var dataController: DataContorller = DataContorller.shared;
     
-    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+//    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
 //    var fetchedResultsController: NSFetchedResultsController<Photo>!;
 //    var pinFetchedResultsController: NSFetchedResultsController<Pin>!;
+    @IBOutlet weak var myCollectionView: UICollectionView!
+    
     
     
 //    var annotations: [Annotation]!;
@@ -98,7 +100,8 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
         
         try? dataController.viewContext.save();
         let set = IndexSet(integer: 0);
-        collectionView.reloadSections(set);
+//        collectionView.reloadSections(set);
+        myCollectionView.reloadData();
 //        collectionView.reloadData();
         makeFlickrRequest();
     }
@@ -159,7 +162,8 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
         collectionView.performBatchUpdates({
             self.dataToRequest = data;
             self.photosToRequest = data.count;
-            collectionView.reloadData();
+//            collectionView.reloadData();
+            self.myCollectionView.reloadData();
         }, completion: nil)
 //        DispatchQueue.main.async {
 //            self.dataToRequest = data;
