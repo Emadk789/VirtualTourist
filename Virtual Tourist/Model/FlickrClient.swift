@@ -75,37 +75,12 @@ class FlickrClient: BaseViewController {
         let url = EndPoints.requestImage(photo).url;
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-//            TODO: Handel the error!
-            
-            MapData.data.append(data);
-//            dataContorller.Annotation.data.append(data);
-//            dataContorller.annotations.
-//            BaseViewController.Coordinate.
-            let testData = data;
-            
-//            First Increment!!
-//            annotation.data!.append(data!);
-//            let coreData = annotation.data!;
-            
-            
-//            dataContorller.pin.photos[0].data!.append(data!);
-//            myPhoto.data![0].append(data!);
             guard let data = data else {
                 return
             }
-//            myPhoto.data = data;
-//            let testCoreData = myPhoto.data;
-//            try? dataContorller.viewContext.save()
             let pin: Pin = dataContorller.getCurrentPin(dataController: dataContorller);
-            
-//            let myPhoto2 = Photo(context: dataController.viewContext);
-            //            myPhoto.data = [];
-            //            pin.addToPhotos(myPhoto);
             myPhoto.pin = pin;
             myPhoto.data = data;
-//            dataContorller.viewContext.save;
-            
-
             DispatchQueue.main.async {
                 compleation(data, nil);
             }

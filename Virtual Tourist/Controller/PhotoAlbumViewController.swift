@@ -15,8 +15,6 @@ class PhotoAlbumViewController: BaseViewController {
     @IBOutlet weak var mapView: MKMapView!
     
     var annotation = MKPointAnnotation()
-//    var currentAnnotation: Annotation!;
-//    @IBOutlet weak var newCollectionButton: UIButton!
     @IBOutlet weak var test: UIView!
     
     
@@ -28,43 +26,8 @@ class PhotoAlbumViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-//        let myPin = pin;
         addAnnotation()
     }
-    
-    
-//    @IBAction func newCollectionClicked(_ sender: Any) {
-//        currentAnnotation = getCurrentAnnotation(dataController: dataController);
-//        currentAnnotation.data! = [];
-//        //        TODO: Update the CollectionView to be empty.
-//    }
-    
-//    func handelRestResponse(response: SearchResponse?, error: Error?){
-//        guard response?.photos.photo != [] else {
-//            //            MapData.data = [];
-//            didFinishDownloadeData();
-//            //            TODO: display an alert saying No assosiated photos with the current location found, sorry.
-//            
-//            return
-//        }
-//        for photo in (response?.photos.photo)! {
-//            
-//            FlickrClient.getImage(photo: photo, annotation: currentAnnotation, compleation: self.handelImageResponse(data:error:));
-//            collectionView.reloadData()
-//            
-//        }
-//        
-//        
-//        
-//    }
-//    func handelImageResponse(data: [Data?], error: Error?){
-//        collectionView.reloadData()
-//        //      TODO: Handel the error!!
-//        var data = annotation.data;
-//        try? dataController.viewContext.save();
-//        data = annotation.data;
-//        dataProtocolDelegate?.didFinishDownloadeData();
-//    }
     func addAnnotation(){
         mapView.centerCoordinate = annotation.coordinate;
         mapView.addAnnotation(annotation);
@@ -75,9 +38,6 @@ class PhotoAlbumViewController: BaseViewController {
             photoAlbumCollectionViewController.pin = pin;
             photoAlbumCollectionViewController.photosToRequest = photosToRequest;
             photoAlbumCollectionViewController.dataToRequest = dataToRequest;
-//            dataController.fetchPins();
-//            photoAlbumCollectionViewController.pin = pin;
-//            photoAlbumCollectionViewController.dataProtocolDelegate = self;
         }
     }
 
@@ -112,52 +72,4 @@ extension PhotoAlbumViewController: MKMapViewDelegate {
     }
 }
 
-extension PhotoAlbumViewController: NSFetchedResultsControllerDelegate {
-    
-//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-//        switch type {
-//        case .insert:
-//            collectionView.insertItems(at: [newIndexPath!])
-//            break
-//        case .delete:
-//            collectionView.deleteItems(at: [indexPath!])
-//            break
-//        case .update:
-//            collectionView.reloadItems(at: [indexPath!])
-//        case .move:
-//            collectionView.moveItem(at: indexPath!, to: newIndexPath!)
-//        }
-//    }
-//
-//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-//        let indexSet = IndexSet(integer: sectionIndex)
-//        switch type {
-//        case .insert: collectionView.insertSections(indexSet)
-//        case .delete: collectionView.deleteSections(indexSet)
-//        case .update, .move:
-//            fatalError("Invalid change type in controller(_:didChange:atSectionIndex:for:). Only .insert or .delete should be possible.")
-//        }
-//    }
 
-    
-//    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//        collectionView.beginup
-//    }
-//
-//    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//        tableView.endUpdates()
-//    }
-    
-}
-
-//extension PhotoAlbumViewController: DataProtocol {
-//    func willStartDownloadeData() {
-//        newCollectionButton.isEnabled = false;
-//    }
-//
-//    func didFinishDownloadeData() {
-//        newCollectionButton.isEnabled = true;
-//    }
-//
-//
-//}
