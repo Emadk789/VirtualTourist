@@ -59,19 +59,16 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
         //      TODO:- Make the FlickrRequest if the data of the annotation is empty.
         let data = photos ?? [];
         if data != [] {
-            //            collectionView.reloadData();
             isNotDownloadingData(true);
             return;
         }
-        //        TODO: Double check how are you storing the images Data.
-        //        TODO: Also, reloade the correct data when calling viewWillApper(_:);
         
         makeFlickrRequest();
         
     }
     
     func makeFlickrRequest(){
-        FlickrClient.taskForGetRequest(lat: BaseViewController.Coordinate.lat.value, lon: BaseViewController.Coordinate.lon.value, responseType: SearchResponse.self, page: 1, perPage: 50, completion: self.handelRestResponse(response:error:));
+        FlickrClient.taskForGetRequest(lat: BaseViewController.Coordinate.lat.value, lon: BaseViewController.Coordinate.lon.value, responseType: SearchResponse.self, page: (1...5).randomElement()! , perPage: 12, completion: self.handelRestResponse(response:error:));
     }
     
     func handelRestResponse(response: SearchResponse?, error: Error?){

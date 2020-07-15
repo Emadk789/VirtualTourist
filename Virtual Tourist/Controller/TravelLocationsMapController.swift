@@ -148,7 +148,7 @@ extension TravelLocationsMapController: MKMapViewDelegate {
 
         let potos = dataController.fetchPhotos(pin: pin)
         if potos.isEmpty {
-            FlickrClient.taskForGetRequest(lat: BaseViewController.Coordinate.lat.value, lon: BaseViewController.Coordinate.lon.value, responseType: SearchResponse.self, page: 1, perPage: 50) { response, error in
+            FlickrClient.taskForGetRequest(lat: BaseViewController.Coordinate.lat.value, lon: BaseViewController.Coordinate.lon.value, responseType: SearchResponse.self, page: 1, perPage: 12) { response, error in
                 
                 let data = (response?.photos.photo)!
                 photoAlbumViewController.dataToRequest = data;
