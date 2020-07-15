@@ -186,9 +186,12 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
             dataController.viewContext.delete(dataController.fetchPhotos(pin: pin)[indexPath.row - 1]);
         }
         else {
+            if indexPath.row < fetchedPhotos.count {
             dataController.viewContext.delete(dataController.fetchPhotos(pin: pin)[indexPath.row]);
+            }
             
         }
+        photosToRequest = 0;
         try? dataController.viewContext.save();
         photos = dataController.fetchPhotos(pin: pin);
     }
