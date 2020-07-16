@@ -74,6 +74,11 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
     
     func handelRestResponse(response: SearchResponse?, error: Error?){
         
+        guard error == nil else {
+            self.showFailureAlert(message: error!.localizedDescription);
+            return;
+        }
+        
         guard response?.photos.photo != [] else {
             isNotDownloadingData(true);
             return
@@ -142,6 +147,10 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
         
         let myPhoto2 = Photo(context: dataController.viewContext);
         FlickrClient.getImage(photo: dataToRequest[indexPath.row], myPhoto: myPhoto2) { (data, error) in
+            guard error == nil else {
+                self.showFailureAlert(message: error!.localizedDescription);
+                return;
+            }
             try? self.dataController.viewContext.save();
             if indexPath.row == (self.photosToRequest - 1) {
                 self.isNotDownloadingData(true);
