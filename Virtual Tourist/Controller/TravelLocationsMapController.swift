@@ -153,6 +153,12 @@ extension TravelLocationsMapController: MKMapViewDelegate {
             activityIndicator.isHidden = false;
             activityIndicator.startAnimating();
             FlickrClient.taskForGetRequest(lat: BaseViewController.Coordinate.lat.value, lon: BaseViewController.Coordinate.lon.value, responseType: SearchResponse.self, page: 1, perPage: 12) { response, error in
+                
+                guard error == nil else {
+                    self.showFailureAlert(message: error!.localizedDescription);
+                    return;
+                }
+                
                 self.activityIndicator.stopAnimating();
                 let data = (response?.photos.photo)!
                 photoAlbumViewController.dataToRequest = data;

@@ -44,47 +44,9 @@ class BaseViewController: UIViewController {
 
 extension UIViewController {
     
-//    func getCurrentAnnotation(dataController: DataContorller) -> Annotation{
-//    //        BaseViewController.Coordinate.lat;
-//            let fetchRequest: NSFetchRequest<Annotation> = Annotation.fetchRequest();
-//            let lat = BaseViewController.Coordinate.lat.value;
-//            let lon = BaseViewController.Coordinate.lon.value;
-//            let predicateLat: NSPredicate = NSPredicate(format: "lat == %@", String(lat));
-//            let predicateLon: NSPredicate = NSPredicate(format: "lon == %@", String(lon));
-//            let compoundPredicate = NSCompoundPredicate(type: .and, subpredicates: [predicateLat, predicateLon])
-//            fetchRequest.predicate = compoundPredicate;
-//    //        let predicate: NSPredicate = NSPredicate(format: "lat", arguments:  BaseViewController.Coordinate.lat);
-//            
-//            do {
-//                let searchResults = try dataController.viewContext.fetch(fetchRequest);
-//                
-//                let currentAnnotation = searchResults[0];
-//                return currentAnnotation;
-//            } catch {
-//                print(fatalError());
-//            }
-//        }
-
-    
-    
-//        func configurCollectionView(){
-//            dataProtocolDelegate?.willStartDownloadeData();
-//    //      TODO: Make the FlickrRequest if the data of the annotation is empty.
-//    //              Otherwise display the data.
-//            let data = annotation.data!;
-//            if data != [] {
-//                collectionView.reloadData();
-//                dataProtocolDelegate?.didFinishDownloadeData();
-//                return;
-//            }
-//    //        if let data = annotation.data {
-//    //            return;
-//    //        }
-//    //        TODO: Double check how are you storing the images Data.
-//    //        TODO: Also, reloade the correct data when calling viewWillApper(_:);
-//
-//            FlickrClient.taskForGetRequest(lat: Double(annotation.lat!)!, lon: Double(annotation.lon!)!, responseType: SearchResponse.self, page: 1, perPage: 50, completion: self.handelRestResponse(response:error:));
-//    //        FlickrClient.taskForGetRequest(lat: (MapData.annotation.coordinate.latitude), lon: (MapData.annotation.coordinate.longitude), responseType: SearchResponse.self, page: 1, perPage: 50, completion: self.handelRestResponse(response:error:));
-//
-//        }
+    func showFailureAlert(message: String) {
+        let alertVC = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        show(alertVC, sender: nil)
+    }
 }

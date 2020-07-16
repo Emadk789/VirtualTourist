@@ -75,6 +75,10 @@ class FlickrClient: BaseViewController {
         let url = EndPoints.requestImage(photo).url;
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard error == nil else {
+                compleation(nil, error);
+                return
+            }
             guard let data = data else {
                 return
             }
