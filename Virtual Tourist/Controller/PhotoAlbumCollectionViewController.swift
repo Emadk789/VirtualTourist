@@ -13,11 +13,11 @@ private let reuseIdentifier = "Cell"
 
 class PhotoAlbumCollectionViewController: UICollectionViewController {
     
-//  MARK: Outlets.
+    //  MARK: Outlets.
     @IBOutlet weak var newCollectionButton: UIButton!
     @IBOutlet weak var myCollectionView: UICollectionView!
     
-//  MARK: Variables.
+    //  MARK: Variables.
     var dataProtocolDelegate: DataProtocol!;
     var dataController: DataContorller = DataContorller.shared;
     var pin: Pin!;
@@ -28,18 +28,18 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
     var dataToRequest: [PhotoContent] = [];
     var isNotDownloadingData = false;
     
-//  MARK: - viewDidLoad.
+    //  MARK: - viewDidLoad.
     override func viewDidLoad() {
         super.viewDidLoad();
         pin = dataController.getCurrentPin(dataController: dataController);
         isNotDownloadingData(false);
     }
-//  MARK:  viewWillAppear.
+    //  MARK:  viewWillAppear.
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated);
         photos = dataController.fetchPhotos(pin: pin);
     }
-//  MARK: - Actions.
+    //  MARK: - Actions.
     @IBAction func newCollectionClicked(_ sender: Any) {
         photos = [];
         photosToRequest = 0;
@@ -54,7 +54,7 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
     }
     
     
-    func configurCollectionView(){
+    private func configurCollectionView(){
         isNotDownloadingData(false);
         //      TODO:- Make the FlickrRequest if the data of the annotation is empty.
         let data = photos ?? [];
@@ -94,30 +94,6 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
         
         isNotDownloadingData(true);
     }
-    func getDataAndReloadCollectionView(data: [PhotoContent]){
-        for photo in data {
-            //            let myPhoto = Photo(context: dataController.viewContext);
-            ////            myPhoto.data = [];
-            ////            pin.addToPhotos(myPhoto);
-            //            myPhoto.pin = pin;
-            //            pinFetchedResultsController.fetchedObjects![0].addToPhotos(myPhoto);
-            //            myPhoto.pin = pinFetchedResultsController.fetchedObjects![0];
-            //            pin.addToPhotos(myPhoto);
-            let myPhoto2 = Photo(context: dataController.viewContext);
-            //                    FlickrClient.getImage(photo: photo, myPhoto: myPhoto2, compleation: self.handelImageResponse(data:error:));
-            FlickrClient.getImage(photo: photo, myPhoto: myPhoto2) { (data, error) in
-                self.photos = self.dataController.fetchPhotos(pin: self.pin);
-                DispatchQueue.main.async{
-                    //            self.photos = self.dataController.fetchPhotos(pin: self.pin);
-                    self.collectionView.reloadData();
-                }
-            }
-            //            collectionView.reloadData();
-            
-        }
-        
-        
-    }
     
     //    MARK: Helper
     func isNotDownloadingData(_ value: Bool){
@@ -148,7 +124,6 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
             guard indexPath.row < photos.count else { return cell }
             guard let data = photos[indexPath.row].data else { return cell }
             let image = UIImage(data: data);
-            print(indexPath.row)
             if photosToRequest == 0 {
                 self.isNotDownloadingData(true);
             }
@@ -176,27 +151,18 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deleteItems(at: [indexPath]);
         let fetchedPhotos = dataController.fetchPhotos(pin: pin);
-//        let testItem = dataController.fetchPhotos(pin: pin)[indexPath.row];
-//        let index = indexPath.row;
-//        let cont = test.count;
-//        let condetion =
-        if indexPath.row == (fetchedPhotos.count - 1) {
-            dataController.viewContext.delete(dataController.fetchPhotos(pin: pin)[indexPath.row - 1]);
-        }
-        else {
-            if indexPath.row < fetchedPhotos.count {
+        if indexPath.row < fetchedPhotos.count {
             dataController.viewContext.delete(dataController.fetchPhotos(pin: pin)[indexPath.row]);
-            }
-            
         }
         photosToRequest = 0;
         try? dataController.viewContext.save();
         photos = dataController.fetchPhotos(pin: pin);
+        myCollectionView.reloadData();
     }
     
 }
+
 
 // MARK: - Collection view flow layout delegate methods
 

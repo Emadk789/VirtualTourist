@@ -21,6 +21,7 @@ class TravelLocationsMapController: BaseViewController, NSFetchedResultsControll
     var mapAnnotations = [MKPointAnnotation]();
     var annotationView: MKAnnotationView! = nil;
     var pinFetchedResultsController: NSFetchedResultsController<Pin>!;
+    let newPin = MKPointAnnotation();
 
     
     func setupPinFetchedResultsController() {
@@ -161,7 +162,7 @@ extension TravelLocationsMapController: MKMapViewDelegate {
             self.navigationController?.pushViewController(photoAlbumViewController, animated: true);
         }
         
-        
+        mapView.deselectAnnotation(view.annotation! , animated: true);
         
         
     }
@@ -172,28 +173,30 @@ extension TravelLocationsMapController {
     
     func gestureConfigurations() {
         let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: #selector(TravelLocationsMapController.handleLongPress(_:)))
+
         longPressRecogniser.minimumPressDuration = 1.0
         mapView.addGestureRecognizer(longPressRecogniser)
     }
     
     @objc func handleLongPress(_ gestureRecognizer : UIGestureRecognizer){
         if gestureRecognizer.state != .began { return }
+
         addAnnotation(with: gestureRecognizer);
     }
     func addAnnotation(with gestureRecognizer: UIGestureRecognizer){
         let touchPoint = gestureRecognizer.location(in: mapView)
         let touchMapCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
-        
+
 //        Get the location coordinate
         let annotation = MKPointAnnotation();
-        annotation.coordinate = touchMapCoordinate;
-        
-        mapAnnotations.append(annotation);
-        mapView.addAnnotation(annotation);
-        
-        let pin = Pin(context: dataController.viewContext);
-               pin.lat = String(annotation.coordinate.latitude);
-               pin.lon = String(annotation.coordinate.longitude);
-        try? dataController.viewContext.save();
+            annotation.coordinate = touchMapCoordinate;
+            mapView.addAnnotation(annotation);
+             mapAnnotations.append(annotation);
+            let pin = Pin(context: dataController.viewContext);
+                   pin.lat = String(annotation.coordinate.latitude);
+                   pin.lon = String(annotation.coordinate.longitude);
+            try? dataController.viewContext.save();
+
     }
+    
 }
