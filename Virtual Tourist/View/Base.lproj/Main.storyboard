@@ -19,9 +19,14 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hZm-XT-99K">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </mapView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="ZLe-1D-Ako">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="ZLe-1D-Ako" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="SbI-sg-pZU"/>
+                            <constraint firstItem="ZLe-1D-Ako" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Xqh-0c-yfc"/>
                             <constraint firstItem="hZm-XT-99K" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-44" id="hRo-df-MRO"/>
                             <constraint firstItem="hZm-XT-99K" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="ktl-oK-LLS"/>
                             <constraint firstItem="hZm-XT-99K" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="meu-c4-kod"/>
@@ -33,6 +38,7 @@
                         <barButtonItem key="backBarButtonItem" title="OK" id="Qyd-bA-QBa"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="ZLe-1D-Ako" id="GPW-Xs-RpD"/>
                         <outlet property="mapView" destination="hZm-XT-99K" id="WSH-NB-0mv"/>
                         <segue destination="llG-Dz-AkB" kind="show" id="iQl-ur-ywH"/>
                     </connections>
@@ -161,24 +167,30 @@
                                     <action selector="newCollectionClicked:" destination="e6b-UH-cN5" eventType="touchUpInside" id="YHp-sK-Ti7"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="TWj-sf-Ek5">
+                                <rect key="frame" x="177.5" y="214.5" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="46g-ss-yPF" firstAttribute="top" secondItem="At6-yp-tQY" secondAttribute="bottom" constant="2" id="4OW-QX-Jev"/>
                             <constraint firstItem="46g-ss-yPF" firstAttribute="leading" secondItem="DC8-Nv-yLN" secondAttribute="leading" id="U7j-xa-nxN"/>
+                            <constraint firstItem="TWj-sf-Ek5" firstAttribute="centerX" secondItem="dqp-Da-ewn" secondAttribute="centerX" id="bun-Vz-2t7"/>
                             <constraint firstItem="46g-ss-yPF" firstAttribute="trailing" secondItem="DC8-Nv-yLN" secondAttribute="trailing" id="ccj-Ob-2z5"/>
+                            <constraint firstItem="TWj-sf-Ek5" firstAttribute="centerY" secondItem="dqp-Da-ewn" secondAttribute="centerY" id="jDR-fI-UUM"/>
                             <constraint firstItem="46g-ss-yPF" firstAttribute="bottom" secondItem="DC8-Nv-yLN" secondAttribute="bottom" id="l7H-vv-WSE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DC8-Nv-yLN"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="TWj-sf-Ek5" id="Ul4-N0-BYw"/>
                         <outlet property="myCollectionView" destination="At6-yp-tQY" id="1WA-2c-Hmd"/>
                         <outlet property="newCollectionButton" destination="46g-ss-yPF" id="cBB-d8-YCJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pX2-0T-uyi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3480.8000000000002" y="76.911544227886068"/>
+            <point key="canvasLocation" x="3489" y="97"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="egi-gn-xpK">
@@ -202,7 +214,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tk5-wp-Ny4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3785" y="644"/>
+            <point key="canvasLocation" x="3860" y="856"/>
         </scene>
         <!--Photo Album Collection View Controller-->
         <scene sceneID="4Uu-4W-l5G">

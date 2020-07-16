@@ -15,6 +15,7 @@ import CoreData
 class TravelLocationsMapController: BaseViewController, NSFetchedResultsControllerDelegate {
 //    MARK: Outlets
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
 //  MARK: Variables
     let locationManager =  CLLocationManager()
@@ -149,8 +150,10 @@ extension TravelLocationsMapController: MKMapViewDelegate {
 
         let potos = dataController.fetchPhotos(pin: pin)
         if potos.isEmpty {
+            activityIndicator.isHidden = false;
+            activityIndicator.startAnimating();
             FlickrClient.taskForGetRequest(lat: BaseViewController.Coordinate.lat.value, lon: BaseViewController.Coordinate.lon.value, responseType: SearchResponse.self, page: 1, perPage: 12) { response, error in
-                
+                self.activityIndicator.stopAnimating();
                 let data = (response?.photos.photo)!
                 photoAlbumViewController.dataToRequest = data;
                 photoAlbumViewController.photosToRequest = data.count

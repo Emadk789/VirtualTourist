@@ -16,6 +16,7 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
     //  MARK: Outlets.
     @IBOutlet weak var newCollectionButton: UIButton!
     @IBOutlet weak var myCollectionView: UICollectionView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     //  MARK: Variables.
     var dataProtocolDelegate: DataProtocol!;
@@ -98,6 +99,14 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
     //    MARK: Helper
     func isNotDownloadingData(_ value: Bool){
         newCollectionButton.isEnabled = value;
+        if !value {
+            activityIndicator.isHidden = false;
+            activityIndicator.startAnimating();
+        }
+        else {
+            activityIndicator.isHidden = true;
+            activityIndicator.stopAnimating();
+        }
     }
     
     
