@@ -25,6 +25,7 @@
 		695D979224AFC4260077AC06 /* MapData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D979124AFC4250077AC06 /* MapData.swift */; };
 		695D979424AFD8690077AC06 /* DataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D979324AFD8690077AC06 /* DataProtocol.swift */; };
 		695D979624B019DA0077AC06 /* DataContorller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D979524B019DA0077AC06 /* DataContorller.swift */; };
+		69736F7C24C0D7F8004DF35F /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69736F7B24C0D7F8004DF35F /* ErrorResponse.swift */; };
 		697A72ED24B93C84007B169C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697A72EC24B93C84007B169C /* BaseViewController.swift */; };
 		697A733F24BA5CF1007B169C /* VirtualTourist.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 697A733D24BA5CF1007B169C /* VirtualTourist.xcdatamodeld */; };
 		697DF51F24B0E2D500CAFC89 /* Pin + Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697DF51E24B0E2D500CAFC89 /* Pin + Extra.swift */; };
@@ -51,6 +52,7 @@
 		695D979124AFC4250077AC06 /* MapData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapData.swift; sourceTree = "<group>"; };
 		695D979324AFD8690077AC06 /* DataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProtocol.swift; sourceTree = "<group>"; };
 		695D979524B019DA0077AC06 /* DataContorller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataContorller.swift; sourceTree = "<group>"; };
+		69736F7B24C0D7F8004DF35F /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		697A72EC24B93C84007B169C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		697A733E24BA5CF1007B169C /* VirtualTourist.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VirtualTourist.xcdatamodel; sourceTree = "<group>"; };
 		697DF51E24B0E2D500CAFC89 /* Pin + Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pin + Extra.swift"; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				695D978A24AF2D550077AC06 /* FlickrClient.swift */,
+				69736F7B24C0D7F8004DF35F /* ErrorResponse.swift */,
 			);
 			name = "Flickr Client";
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				695D978124ACA0B50077AC06 /* PhotoAlbumViewController.swift in Sources */,
 				695D976B24AB8C550077AC06 /* SceneDelegate.swift in Sources */,
 				695D978324ACBD170077AC06 /* PhotoAlbumCollectionViewController.swift in Sources */,
+				69736F7C24C0D7F8004DF35F /* ErrorResponse.swift in Sources */,
 				695D979224AFC4260077AC06 /* MapData.swift in Sources */,
 				695D978B24AF2D560077AC06 /* FlickrClient.swift in Sources */,
 			);

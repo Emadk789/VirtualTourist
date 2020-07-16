@@ -33,9 +33,6 @@ class BaseViewController: UIViewController {
     }
     
     static func setCurrentAnnotation(lat: Double, lon: Double){
-//        Coordinate.lat = BaseViewController.Coordinate(rawValue: Double(lat)!)!;
-//        coordinate["lat"] = Double(lat)!;
-//        coordinate["lat"] = Double(lon)!;
         coordinate["lat"] = lat;
         coordinate["lon"] = lon;
     }
@@ -45,8 +42,8 @@ class BaseViewController: UIViewController {
 extension UIViewController {
     
     func showFailureAlert(message: String) {
-        let alertVC = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        show(alertVC, sender: nil)
+        let alertVC = UIAlertController(title: message, message: nil, preferredStyle: .alert);
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil));
+        present(alertVC, animated: true, completion: nil);
     }
 }

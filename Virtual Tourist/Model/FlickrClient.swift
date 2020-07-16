@@ -46,7 +46,9 @@ class FlickrClient: BaseViewController {
     static func taskForGetRequest<ResponseType: Decodable>(lat: Double, lon: Double, responseType: ResponseType.Type, page: Int = 1, perPage: Int = 10, completion: @escaping (ResponseType?,Error?)-> Void) {
         
         let url = EndPoints.searchWithNumberOfImages(lat, lon, page, perPage).url;
-        
+        let fakeURLString = EndPoints.searchWithNumberOfImages(lat, -700, page, perPage).stringValue + "dbfnvufnvruvnuvnruv";
+//        You can use this fake url to test the Alert functinality
+        let fakeURL = URL(string: fakeURLString);
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard error == nil else {
                 completion(nil, error);
@@ -64,7 +66,14 @@ class FlickrClient: BaseViewController {
                     completion(result, nil);
                 }
             } catch {
-                completion(nil, error);
+                do {
+                    let result = try decoder.decode(ErrorResponse.self, from: data!) as Error;
+                    DispatchQueue.main.async {
+                        completion(nil, result);
+                    }
+                } catch {
+                    completion(nil, error);
+                }
             }
         }
         task.resume()

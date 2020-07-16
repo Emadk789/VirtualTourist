@@ -156,6 +156,7 @@ extension TravelLocationsMapController: MKMapViewDelegate {
                 
                 guard error == nil else {
                     self.showFailureAlert(message: error!.localizedDescription);
+                    self.activityIndicator.stopAnimating();
                     return;
                 }
                 
@@ -176,6 +177,7 @@ extension TravelLocationsMapController: MKMapViewDelegate {
         
     }
 }
+
 
 // MARK:- Gesture Recognizer Methods.
 extension TravelLocationsMapController {

@@ -33,12 +33,18 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad();
         pin = dataController.getCurrentPin(dataController: dataController);
-        isNotDownloadingData(false);
     }
     //  MARK:  viewWillAppear.
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated);
         photos = dataController.fetchPhotos(pin: pin);
+        let data = photos ?? [];
+                if data != [] {
+                    isNotDownloadingData(false);
+                    return;
+                }
+                showFailureAlert(message: "No data associated with the current location, Sorry");
+                isNotDownloadingData(true);
     }
     //  MARK: - Actions.
     @IBAction func newCollectionClicked(_ sender: Any) {
@@ -60,6 +66,7 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
         //      TODO:- Make the FlickrRequest if the data of the annotation is empty.
         let data = photos ?? [];
         if data != [] {
+            showFailureAlert(message: "No data associated with the current location, Sorry");
             isNotDownloadingData(true);
             return;
         }
@@ -75,12 +82,12 @@ class PhotoAlbumCollectionViewController: UICollectionViewController {
     func handelRestResponse(response: SearchResponse?, error: Error?){
         
         guard error == nil else {
-            self.showFailureAlert(message: error!.localizedDescription);
             return;
         }
         
         guard response?.photos.photo != [] else {
             isNotDownloadingData(true);
+            showFailureAlert(message: "No data associated with the current location, Sorry");
             return
         }
         
